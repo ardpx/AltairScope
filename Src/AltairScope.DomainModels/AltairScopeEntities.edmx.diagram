@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf08c51d00a2474fb278c28b0e826489" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="AltairScopeModel.Property" Width="1.5" PointX="7.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AltairScopeModel.Property_Sale" Width="1.5" PointX="3.375" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Sales_Property" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AltairScopeModel.Property_Change_History" Width="1.5" PointX="13.875" PointY="3.5" />
+        <EntityTypeShape EntityType="AltairScopeModel.Property_Comment" Width="1.5" PointX="10.625" PointY="8.875" />
+        <EntityTypeShape EntityType="AltairScopeModel.User" Width="1.5" PointX="16.25" PointY="7.5" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Change_Histories_Properties" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Comments_Properties" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Change_Histories_Users" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Comments_Users" />
+        <EntityTypeShape EntityType="AltairScopeModel.Property_Evaluation" Width="1.5" PointX="3.25" PointY="1.5" />
+        <AssociationConnector Association="AltairScopeModel.FK_Property_Evaluations_Property_evaluations" />
+        <EntityTypeShape EntityType="AltairScopeModel.Neighbourhood" Width="1.5" PointX="6.875" PointY="13.125" />
+        <AssociationConnector Association="AltairScopeModel.FK_Properties_Neighbourhood" />
+        <AssociationConnector Association="AltairScopeModel.FK_Properties_Property_Change_Histories" />
+        <AssociationConnector Association="AltairScopeModel.FK_Properties_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{184D41A3-EAD4-49BC-83A3-A239D0BE7B3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AltairScope.DomainModels</RootNamespace>
+    <AssemblyName>AltairScope.DomainModels</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Src\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Src\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AltairScopeEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AltairScopeEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AltairScopeEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AltairScopeEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AltairScopeEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AvailabilityType.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DecisionStatusType.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\Property.cs" />
+    <Compile Include="Services\PropertyEvaluator.cs" />
+    <Compile Include="Extensions\User.cs" />
+    <Compile Include="IAppContext.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Neighbourhood.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Property_Change_History.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Property_Comment.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Property_Evaluation.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Property_Sale.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleType.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\NeighbourhoodDataServices.cs" />
+    <Compile Include="Services\PropertyDataServices.cs" />
+    <Compile Include="Services\UserDataServices.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AltairScopeEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AltairScopeEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AltairScopeEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AltairScopeEntities.edmx</DependentUpon>
+      <LastGenOutput>AltairScopeEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="AltairScopeEntities.edmx.diagram">
+      <DependentUpon>AltairScopeEntities.edmx</DependentUpon>
+    </None>
+    <None Include="AltairScopeEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AltairScopeEntities.edmx</DependentUpon>
+      <LastGenOutput>AltairScopeEntities.cs</LastGenOutput>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

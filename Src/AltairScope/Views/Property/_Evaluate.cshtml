@@ -1,0 +1,56 @@
+﻿@model AltairScope.Models.ViewablePropertyViewModel
+
+@if(Model.ReturnRate_Mean != null)
+{
+	<div class="editor-label">
+		@Html.LabelFor(model => model.Score)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.Score)
+		@Html.ValidationMessageFor(model => model.Score)
+	</div>
+
+	<div class="editor-label">
+		@Html.LabelFor(model => model.ReturnRate_Mean)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.ReturnRate_Mean)
+		@Html.ValidationMessageFor(model => model.ReturnRate_Mean)
+	</div>
+
+	<div class="editor-label">
+		@Html.LabelFor(model => model.CashFlow_Mean)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.CashFlow_Mean)
+		@Html.ValidationMessageFor(model => model.CashFlow_Mean)
+	</div>
+
+	<div class="editor-label">
+		<label>10y Return Rates</label>
+	</div>
+	<div class="editor-field">
+		<table>
+			<th>
+				@for (int i = 1; i <= 10; i++)
+				{
+					<td>@string.Format("y{0}", i)</td>
+				}
+			</th>
+			<tr>
+				<td>Return%</td>
+				@foreach (var rr in Model.ReturnRateList)
+				{
+					<td>@string.Format("{0:0.00%}", rr)</td>
+				}
+			</tr>
+			<tr>
+				<td>Cashflow</td>
+				@foreach (var cf in Model.CashFlowList)
+				{
+					<td>@string.Format("{0:C0}", cf)</td>
+				}
+			</tr>
+		</table>
+	</div>
+}

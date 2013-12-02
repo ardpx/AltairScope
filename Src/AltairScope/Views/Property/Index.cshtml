@@ -1,0 +1,30 @@
+﻿@model List<AltairScope.Models.PropertyViewModel>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Property Grid";
+}
+
+<style type="text/css">
+.content-wrapper {
+	max-width: 1280px !important;
+} 
+</style>
+
+<h2>Property List</h2>
+
+@Html.Grid(Model).Columns(column =>
+	{
+		column.Add(p => p.DecisionStatus).Titled("Decision").Filterable(true);
+		column.Add(p => p.Address).Titled("Address");
+		column.Add(p => p.Neighbourhood).Titled("Neighbourhood");
+		column.Add(p => p.SaleType).Titled("Type").Filterable(true);
+		column.Add(p => p.Availability).Titled("Availibility");
+		column.Add(p => p.Score).Titled("Score").Sortable(true);
+		column.Add(p => p.Price).Titled("Price").Format("{0:c}");
+		column.Add(p => p.Fmv_Mean).Titled("FMV").Format("{0:c}");
+		column.Add(p => p.Rent_Mean).Titled("Rental").Format("{0:c}");
+		column.Add(p => p.Return_Rate_Mean).Titled("Return %").Format("{0:0.00%}");
+		column.Add(p => p.Cash_Flow_Mean).Titled("Cash Flow").Format("{0:c}");
+		column.Add(p => p.Id).Titled("Action").Sanitized(false).Encoded(false).RenderValueAs(p => Html.ActionLink("Edit", "Edit", "Property", new { Id = p.Id }, null));
+	}).WithPaging(40).WithMultipleFilters()

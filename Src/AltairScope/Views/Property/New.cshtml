@@ -1,0 +1,222 @@
+﻿@model AltairScope.Models.NewPropertyViewModel
+
+@{
+    ViewBag.Title = "Add New Property Info";
+}
+
+<h2>Add New Property Info</h2>
+
+@using (Html.BeginForm("Create", "Property")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>NewPropertyViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Neighbourhood)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Neighbourhood)
+            @Html.ValidationMessageFor(model => model.Neighbourhood)
+			<button id="checkNeighbourhood">Check</button>
+			<span id="neighbourhoodName"></span>
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.SaleType)
+        </div>
+        <div class="editor-field">
+            @Html.EnumDropDownListFor(model => model.SaleType)
+            @Html.ValidationMessageFor(model => model.SaleType)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.Availability)
+        </div>
+        <div class="editor-field">
+            @Html.EnumDropDownListFor(model => model.Availability)
+            @Html.ValidationMessageFor(model => model.Availability)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url_Redfin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url_Redfin)
+            @Html.ValidationMessageFor(model => model.Url_Redfin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url_Zillow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url_Zillow)
+            @Html.ValidationMessageFor(model => model.Url_Zillow)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url_Ziprealty)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url_Ziprealty)
+            @Html.ValidationMessageFor(model => model.Url_Ziprealty)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Bed)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Bed)
+            @Html.ValidationMessageFor(model => model.Bed)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SquareFoot)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SquareFoot)
+            @Html.ValidationMessageFor(model => model.SquareFoot)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Hoa)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Hoa)
+            @Html.ValidationMessageFor(model => model.Hoa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaxableTax)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaxableTax)
+            @Html.ValidationMessageFor(model => model.TaxableTax)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaxableAdditions)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaxableAdditions)
+            @Html.ValidationMessageFor(model => model.TaxableAdditions)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaxableTotal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaxableTotal)
+            @Html.ValidationMessageFor(model => model.TaxableTotal)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FMV_Zestimate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FMV_Zestimate)
+            @Html.ValidationMessageFor(model => model.FMV_Zestimate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FMV_Smartzip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FMV_Smartzip)
+            @Html.ValidationMessageFor(model => model.FMV_Smartzip)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FMV_Eappraisal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FMV_Eappraisal)
+            @Html.ValidationMessageFor(model => model.FMV_Eappraisal)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rental_Zrent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rental_Zrent)
+            @Html.ValidationMessageFor(model => model.Rental_Zrent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rental_Rentometer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rental_Rentometer)
+            @Html.ValidationMessageFor(model => model.Rental_Rentometer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rental_Zilpy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rental_Zilpy)
+            @Html.ValidationMessageFor(model => model.Rental_Zilpy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ZillowGrowthRate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ZillowGrowthRate)
+            @Html.ValidationMessageFor(model => model.ZillowGrowthRate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+		var checkNeighbourhoodUrl = "@Url.Action("Check", "Neighbourhood")";
+		$(document).ready(function () {
+			$("#checkNeighbourhood").click(function () {
+				$("#checkNeighbourhood").text("Checking");
+				var neighbourhoodName = $("#Neighbourhood").val();
+				var postData = { "name": neighbourhoodName };
+				$.ajax({
+					type: "GET",
+					url: checkNeighbourhoodUrl,
+					data: postData,
+					dataType: "json"
+				}).done(function (data) {
+					$("#Neighbourhood").val(data.id);
+					$("#neighbourhoodName").text(neighbourhoodName);
+					$("#checkNeighbourhood").text("Check");
+				}).error(function () {
+					$("#checkNeighbourhood").text("Check");
+					alert("no matched neighbourhood");
+				});
+			});
+		});
+	</script>
+}

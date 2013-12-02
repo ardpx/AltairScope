@@ -1,0 +1,17 @@
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.dll.config
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.dll
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.pdb
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\EntityFramework.dll
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\EntityFramework.xml
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\obj\Debug\AltairScope.DomainModels.dll
+D:\Documents\GitHub\AltairScope\AltairScope.DomainModels\obj\Debug\AltairScope.DomainModels.pdb
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.dll.config
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.dll
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\bin\Debug\AltairScope.DomainModels.pdb
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\bin\Debug\EntityFramework.xml
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\obj\Debug\AltairScope.DomainModels.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\obj\Debug\AltairScope.DomainModels.dll
+D:\Documents\GitHub\AltairScope\Src\AltairScope.DomainModels\obj\Debug\AltairScope.DomainModels.pdb
