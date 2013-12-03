@@ -35,6 +35,10 @@ namespace AltairScope.DomainModels
         public Nullable<int> cash_flow_y8 { get; set; }
         public Nullable<int> cash_flow_y9 { get; set; }
         public Nullable<int> cash_flow_y10 { get; set; }
+        public Nullable<decimal> appreciation_rate { get; set; }
+        public Nullable<decimal> vacancy_ratio_first_year { get; set; }
+        public Nullable<decimal> vacancy_ratio_subsequent_years { get; set; }
+        public Nullable<int> initial_cash { get; set; }
     
         public virtual Property Property { get; set; }
     }

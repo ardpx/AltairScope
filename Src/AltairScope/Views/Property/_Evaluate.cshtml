@@ -3,6 +3,38 @@
 @if(Model.ReturnRate_Mean != null)
 {
 	<div class="editor-label">
+		@Html.LabelFor(model => model.InitialCash)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.InitialCash)
+		@Html.ValidationMessageFor(model => model.InitialCash)
+	</div>
+	
+	<div class="editor-label">
+		@Html.LabelFor(model => model.EstimatedAppreciationRate)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.EstimatedAppreciationRate)
+		@Html.ValidationMessageFor(model => model.EstimatedAppreciationRate)
+	</div>
+	
+	<div class="editor-label">
+		@Html.LabelFor(model => model.VacancyFirstYear)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.VacancyFirstYear)
+		@Html.ValidationMessageFor(model => model.VacancyFirstYear)
+	</div>
+	
+	<div class="editor-label">
+		@Html.LabelFor(model => model.VacancySubsequentYear)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.VacancySubsequentYear)
+		@Html.ValidationMessageFor(model => model.VacancySubsequentYear)
+	</div>
+	
+	<div class="editor-label">
 		@Html.LabelFor(model => model.Score)
 	</div>
 	<div class="editor-field">

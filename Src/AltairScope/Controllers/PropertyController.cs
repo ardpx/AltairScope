@@ -123,6 +123,7 @@ namespace AltairScope.Controllers
 
 			PropertyEvaluator evaluator = new PropertyEvaluator();
 			evaluator.Evaluate(property);
+			WebAppContext.Current.Commit();
 
 			_propertyVMServices = new PropertyViewModelServices();
 			var viewablePropertyViewModelForEvaluation = _propertyVMServices.ConvertToViewableViewModelForEvaluation(property);

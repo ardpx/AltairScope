@@ -128,20 +128,36 @@ namespace AltairScope.Models
 		[Display(Name = "Rental Mean", Order = 5)]
 		public int? Rental_Mean { set; get; }
 
-		[Display(Name = "Return Rate", Order = 6)]
+		[Display(Name = "Return Rate Mean", Order = 6)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
 		public decimal? ReturnRate_Mean { set; get; }
 
-		[Display(Name = "Cash Flow", Order = 7)]
+		[Display(Name = "Cash Flow Mean", Order = 7)]
 		public int? CashFlow_Mean { set; get; }
 
 		[Display(Name = "Score", Order = 8)]
 		public decimal? Score { set; get; }
 
+		[Display(Name = "Initial Cash", Order = 9)]
+		public int? InitialCash { set; get; }
+
+		[Display(Name = "First Year Vacancy", Order = 10)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		public decimal? VacancyFirstYear { set; get; }
+
+		[Display(Name = "Subsequent Year Vacancy", Order = 12)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		public decimal? VacancySubsequentYear { set; get; }
+
+		[Display(Name = "Estimated Appreciation Rate", Order = 13)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		public decimal? EstimatedAppreciationRate { set; get; }
+
 		public List<decimal?> ReturnRateList { set; get; }
 
 		public List<int?> CashFlowList { set; get; }
 
-		[Display(Name = "Decision", Order = 9)]
+		[Display(Name = "Decision", Order = 14)]
 		public DecisionStatusType DecisionStatus { set; get; }
 
 		

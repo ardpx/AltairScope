@@ -175,9 +175,15 @@ namespace AltairScope.Services
 
 		private void MapDomainModelToViewableViewModelForEvaluation(Property property, ViewablePropertyViewModel viewablePropertyViewModel)
 		{
+			viewablePropertyViewModel.InitialCash = property.Property_Evaluation.initial_cash;
+			viewablePropertyViewModel.EstimatedAppreciationRate = property.Property_Evaluation.appreciation_rate;
+			viewablePropertyViewModel.VacancyFirstYear = property.Property_Evaluation.vacancy_ratio_first_year;
+			viewablePropertyViewModel.VacancySubsequentYear = property.Property_Evaluation.vacancy_ratio_subsequent_years;
+
 			viewablePropertyViewModel.Score = property.Property_Sale.score;
 			viewablePropertyViewModel.ReturnRate_Mean = property.Property_Sale.return_rate_mean;
 			viewablePropertyViewModel.CashFlow_Mean = property.Property_Sale.cash_flow_mean;
+
 
 			viewablePropertyViewModel.ReturnRateList = new List<decimal?>();
 			viewablePropertyViewModel.CashFlowList = new List<int?>();
