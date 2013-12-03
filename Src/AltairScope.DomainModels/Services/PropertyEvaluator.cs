@@ -18,7 +18,7 @@ namespace AltairScope.DomainModels.Services
 
 		private decimal _EstimatedAnnualAppreciationRate;
 
-		private int _TermsOfLoan = 360;
+		private int _TermsOfLoan_Months = 360;
 
 		private int _FirstYearImprovements = 2500;
 
@@ -54,7 +54,7 @@ namespace AltairScope.DomainModels.Services
 
 		private decimal _DepreciationRecapture = 0.25m;
 
-		private decimal _Mortgage_Monthly;
+		private double _Mortgage_Monthly;
 
 		private Property _Property = null;
 		private Property_Sale _PropertySale = null;
@@ -92,7 +92,16 @@ namespace AltairScope.DomainModels.Services
 
 		private void _Calculate_Mortgage()
 		{
-			//_Mortgage_Monthly = 
+			double[] interestToPayAannual = new double[10]; 
+			double beginningBalance = (double)(_Price * _LoanToValue);
+			double monthlyLoanInterestRate = (double)_LoanInterestRate / 12;
+			_Mortgage_Monthly = beginningBalance * (double)monthlyLoanInterestRate * Math.Pow((1 + monthlyLoanInterestRate), _TermsOfLoan_Months) / (Math.Pow((1 + monthlyLoanInterestRate), _TermsOfLoan_Months) - 1);
+			
+		}
+
+		private double _Calculate_Annual_Interest(int yearNo, int balance, double mortgageMonthly)
+		{
+			return 0;
 		}
 	}
 }
