@@ -21,9 +21,8 @@ namespace AltairScope.DomainModels.Services
 		{
 			var db = appContext.GetPersistenceContext();
 			DbQuery<Property> query = GetQuery(db, eagerLoadMode);
-			Property propertyList = db.Properties.Include("Property_Sale")
-									  .Where(p => p.id == id)
-									  .FirstOrDefault();
+			Property propertyList = query.Where(p => p.id == id)
+										 .FirstOrDefault();
 			return propertyList;
 		}
 

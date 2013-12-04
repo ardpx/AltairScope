@@ -4,7 +4,7 @@
     ViewBag.Title = "View";
 }
 
-<h2>View</h2>
+<h2>View Property</h2>
 
     <fieldset>
         <legend>ViewablePropertyViewModel</legend>
@@ -215,6 +215,22 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.ZillowGrowthRate)
             @Html.ValidationMessageFor(model => model.ZillowGrowthRate)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.OfferPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferPrice)
+            @Html.ValidationMessageFor(model => model.OfferPrice)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.OfferDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferDate)
+            @Html.ValidationMessageFor(model => model.OfferDate)
         </div>
 
 		<div id="evaluationResult">

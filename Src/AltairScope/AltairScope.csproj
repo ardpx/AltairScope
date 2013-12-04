@@ -338,6 +338,7 @@
     <Content Include="Views\Property\Edit.cshtml" />
     <Content Include="Views\Property\View.cshtml" />
     <Content Include="Views\Property\_Evaluate.cshtml" />
+    <Content Include="Views\Property\ChangeStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

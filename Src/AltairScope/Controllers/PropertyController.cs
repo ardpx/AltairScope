@@ -133,13 +133,20 @@ namespace AltairScope.Controllers
 
 		public ActionResult ChangeStatus(Guid id)
 		{
-			return View();
+			_propertyDataServices = new PropertyDataServices();
+			var property = _propertyDataServices.GetPropertyById(WebAppContext.Current, id, PropertyEagerLoadMode.Sale);
+
+			_propertyVMServices = new PropertyViewModelServices();
+			var changeStatusPropertyViewModel = _propertyVMServices.ConvertToChangeStatusPropertyViewModel(property);
+
+			return View(changeStatusPropertyViewModel);
 		}
 
 		[HttpPost]
 		public ActionResult ChangeStatus(ChangeStatusPropertyViewModel changeStatusPropertyViewModel)
 		{
-			return View();
+
+			return View("ChangeStatus", changeStatusPropertyViewModel);
 		}
     }
 }

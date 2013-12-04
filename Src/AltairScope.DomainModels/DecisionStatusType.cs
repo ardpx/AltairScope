@@ -13,14 +13,15 @@ namespace AltairScope.DomainModels
     
     public enum DecisionStatusType : int
     {
+		NOT_DECIDED = -1,
+
         NOT_TO_OFFER = 0,
-        TO_OFFER = 1,
-        MAYBE = 2,
-        NOTIFY_AGENT = 3,
+		TO_OFFER = 1, MAYBE = 2,
+
+        AGENT_NOTIFIED = 3,
         OFFERED = 4,
-        OFFER_ACCEPTED = 5,
-        BOUGHT = 6,
-        REJECTED = 7,
-        NOT_DECIDED = -1
+
+		OFFER_ACCEPTED = 5, REJECTED = 7,
+		BOUGHT = 6, UNABLE_TO_OFFER = 8  
     }
 }

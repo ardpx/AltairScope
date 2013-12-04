@@ -111,6 +111,12 @@ namespace AltairScope.Models
 
 	public class ViewablePropertyViewModel : EditPropertyViewModel
 	{
+		[Display(Name = "Offer Price", Order = 0)]
+		public int? OfferPrice { set; get; }
+
+		[Display(Name = "Offer Date", Order = 0)]
+		public DateTime? OfferDate { set; get; }
+
 		[Display(Name = "Tax Rate", Order = 1)]
 		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
 		public decimal? TaxRate { set; get; }
@@ -165,6 +171,23 @@ namespace AltairScope.Models
 
 	public class ChangeStatusPropertyViewModel
 	{
+		[Required]
+		[Display(Name = "Id", Order = 0)]
+		public Guid Id { set; get; }
 
+		[Display(Name = "Address", Order = 1)]
+		public string Address { set; get; }
+
+		[Display(Name = "List Price", Order = 2)]
+		public int Price { set; get; }
+
+		[Display(Name = "Availability", Order = 3)]
+		public AvailabilityType Availability { set; get; }
+
+		[Display(Name = "Status", Order = 4)]
+		public DecisionStatusType DecisionStatus { set; get; }
+
+		[Display(Name = "Offer Price", Order = 5)]
+		public int? OfferPrice { set; get; }
 	}
 }

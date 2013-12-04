@@ -601,6 +601,7 @@
           <Member Name="BOUGHT" Value="6" />
           <Member Name="REJECTED" Value="7" />
           <Member Name="NOT_DECIDED" Value="-1" />
+          <Member Name="NOT_ABLE_TO_OFFER" Value="8" />
         </EnumType>
         <Association Name="FK_Properties_Property_Change_Histories">
           <End Type="AltairScopeModel.Property_Change_History" Role="Property_Change_History" Multiplicity="0..1" />

@@ -159,6 +159,9 @@ namespace AltairScope.Services
 
 			viewablePropertyViewModel.ZillowGrowthRate = property.zillow_growth_rate;
 
+			viewablePropertyViewModel.OfferPrice = property.Property_Sale.offer_price;
+			viewablePropertyViewModel.OfferDate = property.Property_Sale.offer_date;
+
 			MapDomainModelToViewableViewModelForEvaluation(property, viewablePropertyViewModel);
 
 			viewablePropertyViewModel.DecisionStatus = property.Property_Sale.status ?? DecisionStatusType.NOT_DECIDED;
@@ -216,6 +219,20 @@ namespace AltairScope.Services
 				cashFlowList.Add(propertyEvaluation.cash_flow_y10);
 				viewablePropertyViewModel.CashFlowList = cashFlowList;
 			}
+		}
+
+		public ChangeStatusPropertyViewModel ConvertToChangeStatusPropertyViewModel(Property property)
+		{
+			var changeStatusPropertyViewModel = new ChangeStatusPropertyViewModel()
+			{
+				Id = property.id,
+				Address = property.address,
+				Price = property.Property_Sale.price,
+				Availability = property.Property_Sale.availability,
+				DecisionStatus = property.Property_Sale.status.Value,
+				OfferPrice = property.Property_Sale.offer_price,
+			};
+			return changeStatusPropertyViewModel;
 		}
 	}
 }

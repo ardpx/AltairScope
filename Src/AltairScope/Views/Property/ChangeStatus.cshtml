@@ -1,0 +1,87 @@
+﻿@model AltairScope.Models.ChangeStatusPropertyViewModel
+
+@{
+    ViewBag.Title = "ChangeStatus";
+}
+
+<h2>Change Status</h2>
+
+@using (Html.BeginForm("ChangeStatus", "Property", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ChangeStatusPropertyViewModel</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.Availability)
+        </div>
+        <div class="editor-field">
+            @Html.EnumDropDownListFor(model => model.Availability, Model.Availability)
+            @Html.ValidationMessageFor(model => model.Availability)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.DecisionStatus)
+		</div>
+		<div class="editor-field">
+			@Html.EnumDropDownListFor(model => model.DecisionStatus, Model.DecisionStatus)
+			@Html.ValidationMessageFor(model => model.DecisionStatus)
+		</div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.OfferPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfferPrice)
+            @Html.ValidationMessageFor(model => model.OfferPrice)
+        </div>
+
+        <p>
+            <input type="submit" value="Change" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+	<script>
+		$(document).ready(function () {
+			$("#Availability").change(function () {
+				var newAvailability = $(this).val();
+				var currentStatus =  $("#Status").val();
+				if (currentVal == "PENDING" || currentVal == "SOLD" || currentVal == "DELISTED") {
+					if (currentStatus == "OFFERED") {
+						$("#Status").val("REJECTED");
+					} else if (currentStatus == "TO_OFFER" || currentStatus == "AGENT_NOTIFIED" ||
+							   currentStatus == "MAYBE" || currentStatus == "NOT_DECIDED") {
+						$("#Status").val("UNABLE_TO_OFFER");
+					}
+				}
+			});
+		});
+	</script>
+}
