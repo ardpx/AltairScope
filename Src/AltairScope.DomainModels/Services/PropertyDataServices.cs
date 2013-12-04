@@ -13,7 +13,7 @@ namespace AltairScope.DomainModels.Services
 		{
 			var db = appContext.GetPersistenceContext();
 			DbQuery<Property> query = GetQuery(db, eagerLoadMode);
-			List<Property> propertyList = query.ToList();
+			List<Property> propertyList = query.OrderByDescending(q => q.last_update_id).ToList();
 			return propertyList;
 		}
 

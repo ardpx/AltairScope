@@ -111,6 +111,9 @@ namespace AltairScope.Models
 
 	public class ViewablePropertyViewModel : EditPropertyViewModel
 	{
+		[Display(Name = "Neighbourhood Url", Order = 0)]
+		public string NeighbourhoodUrl { set; get; }
+
 		[Display(Name = "Offer Price", Order = 0)]
 		public int? OfferPrice { set; get; }
 

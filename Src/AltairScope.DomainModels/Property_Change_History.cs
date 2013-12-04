@@ -26,6 +26,7 @@ namespace AltairScope.DomainModels
         public string new_value { get; set; }
         public System.DateTime updated_date { get; set; }
         public int updated_by { get; set; }
+        public Nullable<ChangeType> change_type { get; set; }
     
         public virtual Property Property { get; set; }
         public virtual User User { get; set; }

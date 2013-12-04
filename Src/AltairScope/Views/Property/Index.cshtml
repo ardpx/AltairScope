@@ -26,5 +26,7 @@
 		column.Add(p => p.Rent_Mean).Titled("Rental").Format("{0:c}");
 		column.Add(p => p.Return_Rate_Mean).Titled("Return %").Format("{0:0.00%}");
 		column.Add(p => p.Cash_Flow_Mean).Titled("Cash Flow").Format("{0:c}");
-		column.Add(p => p.Id).Titled("Action").Sanitized(false).Encoded(false).RenderValueAs(p => Html.ActionLink("Edit", "Edit", "Property", new { Id = p.Id }, null));
+		column.Add(p => p.Id).Titled("Actions").Sanitized(false).Encoded(false).RenderValueAs(p => Html.ActionLink("Edit", "Edit", "Property", new { Id = p.Id }, null) + "" +
+																								   Html.ActionLink("View", "View", "Property", new { Id = p.Id }, null) + "" +
+																								   Html.ActionLink("Status", "ChangeStatus", "Property", new { Id = p.Id }, null));
 	}).WithPaging(40).WithMultipleFilters()

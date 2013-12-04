@@ -11,17 +11,14 @@ namespace AltairScope.DomainModels
 {
     using System;
     
-    public enum DecisionStatusType : int
+    public enum ChangeType : int
     {
-        NOT_TO_OFFER = 0,
-        TO_OFFER = 1,
-        MAYBE = 2,
-        NOTIFY_AGENT = 3,
-        OFFERED = 4,
-        OFFER_ACCEPTED = 5,
-        BOUGHT = 6,
-        REJECTED = 7,
-        NOT_DECIDED = -1,
-        UNABLE_TO_OFFER = 8
+        Availability = 0,
+        Status = 1,
+        ListPrice = 2,
+        OfferPrice = 3,
+        Evaluation = 4,
+        Created = 5,
+        Edited = 6
     }
 }

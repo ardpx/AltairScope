@@ -272,6 +272,15 @@ namespace AltairScope.DomainModels.Services
 			_Property.Property_Sale.cash_flow_mean = (int)CashflowAfterTax.Average();
 			_Property.Property_Sale.return_rate_mean = (decimal)ReturnRateOnInitialCash.Average();
 			_Property.Property_Sale.score = _Property.Property_Sale.cash_flow_mean / 1200 + _Property.Property_Sale.return_rate_mean / 0.4m;
+
+			var changeHistory = new Property_Change_History()
+			{
+				change_type = ChangeType.Evaluation,
+				updated_date = DateTime.Now,
+				updated_by = 2
+			};
+			_Property.Property_Change_Histories.Add(changeHistory);
+			_Property.Last_Property_Change = changeHistory;
 		}
 	}
 }

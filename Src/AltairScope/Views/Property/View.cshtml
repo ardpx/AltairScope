@@ -26,6 +26,14 @@
         </div>
 
 		<div class="editor-label">
+            @Html.LabelFor(model => model.NeighbourhoodUrl)
+        </div>
+        <div class="editor-field wide-field">
+            @Html.EditorFor(model => model.NeighbourhoodUrl)
+            @Html.ValidationMessageFor(model => model.NeighbourhoodUrl)
+        </div>
+
+		<div class="editor-label">
             @Html.LabelFor(model => model.SaleType)
         </div>
         <div class="editor-field">

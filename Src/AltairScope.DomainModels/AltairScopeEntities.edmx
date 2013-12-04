@@ -111,6 +111,7 @@
           <Property Name="new_value" Type="nvarchar" MaxLength="100" />
           <Property Name="updated_date" Type="datetime" Nullable="false" />
           <Property Name="updated_by" Type="int" Nullable="false" />
+          <Property Name="change_type" Type="int" />
         </EntityType>
         <EntityType Name="Property_Comments">
           <Key>
@@ -422,6 +423,7 @@
           <NavigationProperty Name="Property" Relationship="AltairScopeModel.FK_Property_Change_Histories_Properties" FromRole="Property_Change_Histories" ToRole="Property" />
           <NavigationProperty Name="User" Relationship="AltairScopeModel.FK_Property_Change_Histories_Users" FromRole="Property_Change_Histories" ToRole="User" />
           <NavigationProperty Name="Properties" Relationship="AltairScopeModel.FK_Properties_Property_Change_Histories" FromRole="Property_Change_History" ToRole="Property" />
+          <Property Type="AltairScopeModel.ChangeType" Name="change_type" />
         </EntityType>
         <EntityType Name="Property_Comment">
           <Key>
@@ -601,7 +603,7 @@
           <Member Name="BOUGHT" Value="6" />
           <Member Name="REJECTED" Value="7" />
           <Member Name="NOT_DECIDED" Value="-1" />
-          <Member Name="NOT_ABLE_TO_OFFER" Value="8" />
+          <Member Name="UNABLE_TO_OFFER" Value="8" />
         </EnumType>
         <Association Name="FK_Properties_Property_Change_Histories">
           <End Type="AltairScopeModel.Property_Change_History" Role="Property_Change_History" Multiplicity="0..1" />
@@ -627,6 +629,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="ChangeType">
+          <Member Name="Availability" Value="0" />
+          <Member Name="Status" Value="1" />
+          <Member Name="ListPrice" Value="2" />
+          <Member Name="OfferPrice" Value="3" />
+          <Member Name="Evaluation" Value="4" />
+          <Member Name="Created" Value="5" />
+          <Member Name="Edited" Value="6" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -689,6 +700,7 @@
           <EntitySetMapping Name="Property_Change_History">
             <EntityTypeMapping TypeName="AltairScopeModel.Property_Change_History">
               <MappingFragment StoreEntitySet="Property_Change_Histories">
+                <ScalarProperty Name="change_type" ColumnName="change_type" />
                 <ScalarProperty Name="updated_by" ColumnName="updated_by" />
                 <ScalarProperty Name="updated_date" ColumnName="updated_date" />
                 <ScalarProperty Name="new_value" ColumnName="new_value" />

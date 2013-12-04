@@ -20,8 +20,22 @@ namespace AltairScope.DomainModels
 			_CalculateBuildingRatio();
 			_CalculateMeanOfFMV();
 			_CalculateMeanOfRental();
+
+			var changeHistory = new Property_Change_History()
+			{
+				change_type = ChangeType.Edited,
+				updated_date = DateTime.Now,
+				updated_by = 2
+			};
+
+			this.Property_Change_Histories.Add(changeHistory);
+			this.Last_Property_Change = changeHistory;
+
 			if (this.id == Guid.Empty)
+			{
 				_RecordCreationInfo();
+				changeHistory.change_type = ChangeType.Created;
+			}
 		}
 
 		private void _CalculateTaxRateAndActualTax()

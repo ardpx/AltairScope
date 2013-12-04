@@ -66,6 +66,9 @@
     <Compile Include="AvailabilityType.cs">
       <DependentUpon>AltairScopeEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangeType.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DecisionStatusType.cs">
       <DependentUpon>AltairScopeEntities.tt</DependentUpon>
     </Compile>

@@ -72,14 +72,29 @@
 		$(document).ready(function () {
 			$("#Availability").change(function () {
 				var newAvailability = $(this).val();
-				var currentStatus =  $("#Status").val();
-				if (currentVal == "PENDING" || currentVal == "SOLD" || currentVal == "DELISTED") {
+				var currentStatus = $("#DecisionStatus").val();
+				if (newAvailability == "PENDING" || newAvailability == "SOLD" || newAvailability == "DELISTED") {
 					if (currentStatus == "OFFERED") {
-						$("#Status").val("REJECTED");
-					} else if (currentStatus == "TO_OFFER" || currentStatus == "AGENT_NOTIFIED" ||
-							   currentStatus == "MAYBE" || currentStatus == "NOT_DECIDED") {
-						$("#Status").val("UNABLE_TO_OFFER");
+						$("#DecisionStatus").val("REJECTED");
+					} else if (newAvailability == "TO_OFFER" || newAvailability == "AGENT_NOTIFIED" ||
+							   newAvailability == "MAYBE" || newAvailability == "NOT_DECIDED") {
+						$("#DecisionStatus").val("UNABLE_TO_OFFER");
 					}
+				}
+			});
+
+
+			if ($("#DecisionStatus").val() != "OFFERED" && $("#OfferPrice").val() == "")
+				$("#OfferPrice").hide();
+
+			$("#DecisionStatus").change(function () {
+				if ($("#OfferPrice").val() != "")
+					return;
+				var newStatus = $("#DecisionStatus").val();
+				if (newStatus == "OFFERED") {
+					$("#OfferPrice").show();
+				} else {
+					$("#OfferPrice").hide();
 				}
 			});
 		});

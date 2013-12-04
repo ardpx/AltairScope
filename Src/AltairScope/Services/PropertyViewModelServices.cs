@@ -127,6 +127,7 @@ namespace AltairScope.Services
 
 			viewablePropertyViewModel.Id = property.id;
 			viewablePropertyViewModel.Neighbourhood = property.Neighbourhood != null ? property.Neighbourhood.name : null;
+			viewablePropertyViewModel.NeighbourhoodUrl = property.Neighbourhood != null ? property.Neighbourhood.url : null;
 			viewablePropertyViewModel.Address = property.address;
 			viewablePropertyViewModel.SaleType = property.Property_Sale.type;
 			viewablePropertyViewModel.Availability = property.Property_Sale.availability;
