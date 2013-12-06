@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +10,16 @@ namespace AltairScope.DomainModels.Services
 {
 	public class PropertyDataServices
 	{
-		public List<Property> GetPropertyList(IAppContext appContext, PropertyEagerLoadMode eagerLoadMode = PropertyEagerLoadMode.Sale)
+		public List<Property> GetPropertyList(IAppContext appContext, PropertyEagerLoadMode eagerLoadMode = PropertyEagerLoadMode.Sale, Expression<Func<Property, bool>> where = null)
 		{
 			var db = appContext.GetPersistenceContext();
 			DbQuery<Property> query = GetQuery(db, eagerLoadMode);
-			List<Property> propertyList = query.OrderByDescending(q => q.last_update_id).ToList();
+			var orderedQuery = query.OrderByDescending(q => q.last_update_id);
+			List<Property> propertyList;
+			if (where != null)
+				propertyList = orderedQuery.Where(where).ToList();
+			else
+				propertyList = orderedQuery.ToList();
 			return propertyList;
 		}
 

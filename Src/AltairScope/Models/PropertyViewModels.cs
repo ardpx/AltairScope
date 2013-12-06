@@ -169,7 +169,14 @@ namespace AltairScope.Models
 		[Display(Name = "Decision", Order = 14)]
 		public DecisionStatusType DecisionStatus { set; get; }
 
-		
+		[Display(Name = "Evaluate Price", Order = 15)]
+		public int? EvaluatePrice { set; get; }
+
+		[Display(Name = "Evaluate Rental", Order = 16)]
+		public int? EvaluateRental { set; get; }
+
+		[Display(Name = "Mortgage Monthly", Order = 16)]
+		public int? MortgageMonthly { set; get; }
 	}
 
 	public class ChangeStatusPropertyViewModel
@@ -192,5 +199,8 @@ namespace AltairScope.Models
 
 		[Display(Name = "Offer Price", Order = 5)]
 		public int? OfferPrice { set; get; }
+
+		[Display(Name = "Url Redfin", Order = 1)]
+		public string Url_Redfin { set; get; }
 	}
 }

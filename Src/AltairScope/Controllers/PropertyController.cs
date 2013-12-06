@@ -6,6 +6,7 @@ using AltairScope.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,10 +21,24 @@ namespace AltairScope.Controllers
         //
         // GET: /Property/
 
-		public ActionResult Index()
+		public ActionResult Index(string show = null, string criteria = null)
         {
 			_propertyDataServices = new PropertyDataServices();
-			var propertyList = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Neighbourhood);
+			Expression<Func<Property, bool>> condition = null;
+			if (show == "inProgress")
+			{
+				condition = p => //p.Property_Sale.status == DecisionStatusType.TO_OFFER ||
+								 p.Property_Sale.status == DecisionStatusType.OFFER_ACCEPTED ||
+								 p.Property_Sale.status == DecisionStatusType.OFFERED;
+			}
+			if (criteria == "good")
+			{
+				condition = p => p.Property_Sale.status != DecisionStatusType.UNABLE_TO_OFFER &&
+								 p.Property_Sale.status != DecisionStatusType.REJECTED &&
+								 //p.Property_Sale.status != DecisionStatusType.NOT_TO_OFFER &&
+								 p.Property_Sale.cash_flow_mean > 500;
+			}
+			var propertyList = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Neighbourhood, condition);
 
 			_propertyVMServices = new PropertyViewModelServices();
 			var propertyViewModelList = _propertyVMServices.ConvertToViewModel(propertyList);
@@ -116,12 +131,12 @@ namespace AltairScope.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Evaluate(Guid id)
+		public ActionResult Evaluate(Guid id, int EvaluatePrice = 0, int EvaluateRental = 0, string FixedVacancy = "true")
 		{
 			_propertyDataServices = new PropertyDataServices();
 			var property = _propertyDataServices.GetPropertyById(WebAppContext.Current, id, PropertyEagerLoadMode.Sale_Evaluation_Neighbourhood);
 
-			PropertyEvaluator evaluator = new PropertyEvaluator();
+			PropertyEvaluator evaluator = new PropertyEvaluator(EvaluatePrice, EvaluateRental, bool.Parse(FixedVacancy.ToString()));
 			evaluator.Evaluate(property);
 			WebAppContext.Current.Commit();
 
@@ -210,7 +225,27 @@ namespace AltairScope.Controllers
 			}
 
 			WebAppContext.Current.Commit();
+			changeStatusPropertyViewModel.Url_Redfin = property.Property_Sale.url_redfin;
 			return View("ChangeStatus", changeStatusPropertyViewModel);
+		}
+
+		[HttpPost]
+		public ActionResult ReEvaluateAll()
+		{
+			_propertyDataServices = new PropertyDataServices();
+			var allProperties = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Evaluation_Neighbourhood, p => p.Neighbourhood != null);
+			int i = 0;
+			foreach (var property in allProperties)
+			{
+				property.ValidateAndSave();
+
+				PropertyEvaluator evaluator = new PropertyEvaluator(0, 0, false);
+				evaluator.Evaluate(property);
+				WebAppContext.Current.Commit();
+				i++;
+			}
+
+			return Json(new { finish = i, total = allProperties.Count});
 		}
     }
 }

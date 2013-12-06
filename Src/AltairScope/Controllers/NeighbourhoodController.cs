@@ -1,5 +1,7 @@
 ﻿using AltairScope.DomainModels.Services;
 using AltairScope.Infrastructures;
+using AltairScope.Models;
+using AltairScope.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace AltairScope.Controllers
     public class NeighbourhoodController : Controller
     {
 		NeighbourhoodDataServices _NeighbourhoodDataServices = null;
+		NeighbourhoodViewModelServices _NeighbourhoodVMServices = null;
         //
         // GET: /Neigbourhood/
 
@@ -30,7 +33,7 @@ namespace AltairScope.Controllers
         //
         // GET: /Neigbourhood/Create
 
-        public ActionResult Create()
+        public ActionResult New()
         {
             return View();
         }
@@ -39,13 +42,18 @@ namespace AltairScope.Controllers
         // POST: /Neigbourhood/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+		public ActionResult Create(NewNeighbourhoodViewModel newNeighbourhoodViewModel)
         {
             try
             {
-                // TODO: Add insert logic here
+				_NeighbourhoodVMServices = new NeighbourhoodViewModelServices();
+				var newNeighbourhood = _NeighbourhoodVMServices.ConvertToDomainModel(newNeighbourhoodViewModel);
+				newNeighbourhood.Add(WebAppContext.Current);
+				newNeighbourhood.ValidateAndSave();
+				WebAppContext.Current.Commit();
+				var newId = newNeighbourhood.id;
 
-                return RedirectToAction("Index");
+				return RedirectToAction("View", new { id = newId });
             }
             catch
             {

@@ -8,6 +8,7 @@ namespace AltairScope.DomainModels.Services
 {
 	public class PropertyEvaluator
 	{
+		private bool _Fixed_Vacancy_Ratio;
 		private int _Price;
 
 		private int _FMV;
@@ -76,6 +77,17 @@ namespace AltairScope.DomainModels.Services
 		public double[] ReturnRateOnInitialCash = new double[10];
 		public int InitialCash;
 
+		public PropertyEvaluator()
+		{
+		}
+
+		public PropertyEvaluator(int price, int rental_monthly, bool fixed_vacancy_ratio)
+		{
+			_Price = price;
+			_Rental_Annual = rental_monthly * 12;
+			_Fixed_Vacancy_Ratio = fixed_vacancy_ratio;
+		}
+
 		public void Evaluate(Property property)
 		{
 			_Evaluate_Setup(property);
@@ -95,15 +107,25 @@ namespace AltairScope.DomainModels.Services
 				throw new Exception("no neighbourhood data");
 			_Neighbourhood = property.Neighbourhood;
 
-			_Price = _PropertySale.price;
+			if (_Price == 0)
+				_Price = _PropertySale.price;
 			_FMV = _Property.fmv_mean ?? _Price;
 			EstimatedAnnualAppreciationRate = (double)(_Neighbourhood.appreciation_mean.Value + _Neighbourhood.appreciation_10y) / 2;
-			_Rental_Annual = _Property.rental_mean.Value * 12;
-			FirstYearVacancy = _Neighbourhood.vacancy_ratio > 0.1666m ? (double)(_Neighbourhood.vacancy_ratio + 0.1666m) / 2 : 0.1666d;
-			SubsequentYearVacancy = _Neighbourhood.vacancy_ratio > 0.0833m ? (double)(_Neighbourhood.vacancy_ratio + 0.0833m) / 2 : 0.0833d;
-			_PropertyTax_Annual = _PropertySale.tax;
+			if(_Rental_Annual == 0)
+				_Rental_Annual = _Property.rental_mean.Value * 12;
+			if (_Fixed_Vacancy_Ratio)
+			{
+				FirstYearVacancy = 0.1666d;
+				SubsequentYearVacancy = 0.0833d;
+			}
+			else
+			{
+				FirstYearVacancy = _Neighbourhood.vacancy_ratio > 0.1666m ? (double)(_Neighbourhood.vacancy_ratio + 0.1666m) / 2 : 0.1666d;
+				SubsequentYearVacancy = _Neighbourhood.vacancy_ratio > 0.0833m ? (double)(_Neighbourhood.vacancy_ratio + 0.0833m) / 2 : 0.0833d;
+			}
+				_PropertyTax_Annual = _PropertySale.tax;
 			_AdditionalExpense_Annual = _Property.hoa;
-			_DepreciationRatio = (double)_Property.addition_total_ratio.Value;
+			_DepreciationRatio = (double)(_Property.addition_total_ratio ?? 0.75m);
 
 		}
 
@@ -247,6 +269,10 @@ namespace AltairScope.DomainModels.Services
 			propertyEvaluation.appreciation_rate = (decimal)EstimatedAnnualAppreciationRate;
 			propertyEvaluation.vacancy_ratio_first_year = (decimal)FirstYearVacancy;
 			propertyEvaluation.vacancy_ratio_subsequent_years = (decimal)SubsequentYearVacancy;
+			propertyEvaluation.price = _Price;
+			propertyEvaluation.rental = _Rental_Annual / 12;
+			propertyEvaluation.mortgage_monthly = (int)(_MortgagePayment_Annual / 12d);
+
 			propertyEvaluation.cash_flow_y1 = (int)CashflowAfterTax[0];
 			propertyEvaluation.cash_flow_y2 = (int)CashflowAfterTax[1];
 			propertyEvaluation.cash_flow_y3 = (int)CashflowAfterTax[2];
@@ -269,7 +295,7 @@ namespace AltairScope.DomainModels.Services
 			propertyEvaluation.return_rate_y9 = (decimal)ReturnRateOnInitialCash[8];
 			propertyEvaluation.return_rate_y10 = (decimal)ReturnRateOnInitialCash[9];
 
-			_Property.Property_Sale.cash_flow_mean = (int)CashflowAfterTax.Average();
+			_Property.Property_Sale.cash_flow_mean = (int)(CashflowAfterTax.Sum() - CashflowAfterTax[0])/ 9;
 			_Property.Property_Sale.return_rate_mean = (decimal)ReturnRateOnInitialCash.Average();
 			_Property.Property_Sale.score = _Property.Property_Sale.cash_flow_mean / 1200 + _Property.Property_Sale.return_rate_mean / 0.4m;
 

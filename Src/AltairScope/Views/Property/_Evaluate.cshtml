@@ -57,6 +57,14 @@
 		@Html.EditorFor(model => model.CashFlow_Mean)
 		@Html.ValidationMessageFor(model => model.CashFlow_Mean)
 	</div>
+	
+	<div class="editor-label">
+		@Html.LabelFor(model => model.MortgageMonthly)
+	</div>
+	<div class="editor-field">
+		@Html.EditorFor(model => model.MortgageMonthly)
+		@Html.ValidationMessageFor(model => model.MortgageMonthly)
+	</div>
 
 	<div class="editor-label">
 		<label>10y Return Rates</label>
@@ -86,3 +94,42 @@
 		</table>
 	</div>
 }
+		-------------------------------------------------------------
+@using (Ajax.BeginForm("Evaluate", "Property", new AjaxOptions { UpdateTargetId = "evaluationResult", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
+  {
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+
+			 @Html.HiddenFor(model => model.Id)
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.EvaluatePrice)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.EvaluatePrice)
+			@Html.ValidationMessageFor(model => model.EvaluatePrice)
+		</div>
+	  
+		<div class="editor-label">
+            @Html.LabelFor(model => model.EvaluateRental)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.EvaluateRental)
+			@Html.ValidationMessageFor(model => model.EvaluateRental)  @string.Format("{0}", Model.EvaluateRental * 0.75)
+		</div> 
+	  
+		<div class="editor-label">
+            <label for="FixedVacancy">Fixed Vacancy Ratio</label>
+		</div>
+		<div class="editor-field">
+			<select id="FixedVacancy" name="FixedVacancy" data-val="true">
+				<option value="true" selected ="selected">Yes</option>
+				<option value="false">No</option>
+			</select>
+		</div>
+	  
+			<p>
+				
+				<input type="submit" value="Evaluate" />
+			</p>
+  }

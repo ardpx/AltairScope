@@ -187,8 +187,11 @@ namespace AltairScope.Services
 			viewablePropertyViewModel.Score = property.Property_Sale.score;
 			viewablePropertyViewModel.ReturnRate_Mean = property.Property_Sale.return_rate_mean;
 			viewablePropertyViewModel.CashFlow_Mean = property.Property_Sale.cash_flow_mean;
-
-
+			
+			viewablePropertyViewModel.EvaluatePrice = property.Property_Evaluation.price;
+			viewablePropertyViewModel.EvaluateRental = property.Property_Evaluation.rental;
+			viewablePropertyViewModel.MortgageMonthly = property.Property_Evaluation.mortgage_monthly;
+			
 			viewablePropertyViewModel.ReturnRateList = new List<decimal?>();
 			viewablePropertyViewModel.CashFlowList = new List<int?>();
 			var propertyEvaluation = property.Property_Evaluation;
@@ -232,6 +235,8 @@ namespace AltairScope.Services
 				Availability = property.Property_Sale.availability,
 				DecisionStatus = property.Property_Sale.status.Value,
 				OfferPrice = property.Property_Sale.offer_price,
+				Url_Redfin = property.Property_Sale.url_redfin
+				
 			};
 			return changeStatusPropertyViewModel;
 		}

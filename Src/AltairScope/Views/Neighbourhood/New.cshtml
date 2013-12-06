@@ -1,0 +1,136 @@
+﻿@model AltairScope.Models.NewNeighbourhoodViewModel
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm("Create", "Neighbourhood", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>NewNeighbourhoodViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MedianPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MedianPrice)
+            @Html.ValidationMessageFor(model => model.MedianPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rental)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rental)
+            @Html.ValidationMessageFor(model => model.Rental)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url)
+            @Html.ValidationMessageFor(model => model.Url)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Education)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Education)
+            @Html.ValidationMessageFor(model => model.Education)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EducationalRating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EducationalRating)
+            @Html.ValidationMessageFor(model => model.EducationalRating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_1990)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_1990)
+            @Html.ValidationMessageFor(model => model.Appreciation_1990)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_10Y)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_10Y)
+            @Html.ValidationMessageFor(model => model.Appreciation_10Y)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_5Y)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_5Y)
+            @Html.ValidationMessageFor(model => model.Appreciation_5Y)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_2Y)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_2Y)
+            @Html.ValidationMessageFor(model => model.Appreciation_2Y)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_1Y)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_1Y)
+            @Html.ValidationMessageFor(model => model.Appreciation_1Y)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Appreciation_1Q)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Appreciation_1Q)
+            @Html.ValidationMessageFor(model => model.Appreciation_1Q)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CrimeIndex)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CrimeIndex)
+            @Html.ValidationMessageFor(model => model.CrimeIndex)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VacancyRatio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VacancyRatio)
+            @Html.ValidationMessageFor(model => model.VacancyRatio)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

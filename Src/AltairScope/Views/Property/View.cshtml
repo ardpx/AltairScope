@@ -1,10 +1,15 @@
 ﻿@model AltairScope.Models.ViewablePropertyViewModel
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = @Model.Address;
 }
 
 <h2>View Property</h2>
+<div>
+    @Html.ActionLink("Edit", "Edit" , new {id = Model.Id})
+	@Html.ActionLink("Status", "ChangeStatus", new {id = Model.Id})
+</div>
+<br>
 
     <fieldset>
         <legend>ViewablePropertyViewModel</legend>
@@ -29,8 +34,10 @@
             @Html.LabelFor(model => model.NeighbourhoodUrl)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.NeighbourhoodUrl)
-            @Html.ValidationMessageFor(model => model.NeighbourhoodUrl)
+            @if (!string.IsNullOrEmpty(@Model.NeighbourhoodUrl))
+			{
+			<a href="@Model.NeighbourhoodUrl">@Model.NeighbourhoodUrl</a>
+			}
         </div>
 
 		<div class="editor-label">
@@ -53,24 +60,30 @@
             @Html.LabelFor(model => model.Url_Redfin)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.Url_Redfin)
-            @Html.ValidationMessageFor(model => model.Url_Redfin)
+			@if (!string.IsNullOrEmpty(@Model.Url_Redfin))
+   {
+			<a href="@Model.Url_Redfin">@Model.Url_Redfin</a>
+   }
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Url_Zillow)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.Url_Zillow)
-            @Html.ValidationMessageFor(model => model.Url_Zillow)
+           @if (!string.IsNullOrEmpty(@Model.Url_Zillow))
+		   {
+			<a href="@Model.Url_Zillow">@Model.Url_Zillow</a>
+		   }
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Url_Ziprealty)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.Url_Ziprealty)
-            @Html.ValidationMessageFor(model => model.Url_Ziprealty)
+            @if (!string.IsNullOrEmpty(@Model.Url_Ziprealty))
+			{
+			<a href="@Model.Url_Ziprealty">@Model.Url_Ziprealty</a>
+			}
         </div>
 
         <div class="editor-label">
@@ -240,11 +253,7 @@
             @Html.EditorFor(model => model.OfferDate)
             @Html.ValidationMessageFor(model => model.OfferDate)
         </div>
-
-		<div id="evaluationResult">
-			@Html.Partial("_Evaluate", Model)
-		</div>
-		
+		-------------------------------------------------------------
 		<div class="editor-label">
             @Html.LabelFor(model => model.DecisionStatus)
 		</div>
@@ -253,19 +262,15 @@
 			@Html.ValidationMessageFor(model => model.DecisionStatus)
 		</div>
 
-		@using (Ajax.BeginForm("Evaluate", "Property", new AjaxOptions { UpdateTargetId = "evaluationResult", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
-		{
-			@Html.AntiForgeryToken()
-			@Html.ValidationSummary(true)
-			<p>
-				 @Html.HiddenFor(model => model.Id)
-				<input type="submit" value="Evaluate" />
-			</p>
-		}
+		<div id="evaluationResult">
+			@Html.Partial("_Evaluate", Model)
+		</div>
+		
+		
+
+		
        
     </fieldset>
-
-
 
 
 <div>
@@ -273,8 +278,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
 	<script>
 		var checkNeighbourhoodUrl = "@Url.Action("Check", "Neighbourhood")";
 		var evaluatePropertyUrl = "@Url.Action("Evaluate", "Property")";

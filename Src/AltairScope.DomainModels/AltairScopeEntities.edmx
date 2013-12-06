@@ -152,6 +152,9 @@
           <Property Name="vacancy_ratio_first_year" Type="decimal" Precision="5" Scale="4" />
           <Property Name="vacancy_ratio_subsequent_years" Type="decimal" Precision="5" Scale="4" />
           <Property Name="initial_cash" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="rental" Type="int" />
+          <Property Name="mortgage_monthly" Type="int" />
         </EntityType>
         <EntityType Name="Property_Sales">
           <Key>
@@ -530,6 +533,9 @@
           <Property Type="Decimal" Name="vacancy_ratio_first_year" Precision="5" Scale="4" />
           <Property Type="Decimal" Name="vacancy_ratio_subsequent_years" Precision="5" Scale="4" />
           <Property Type="Int32" Name="initial_cash" />
+          <Property Type="Int32" Name="price" />
+          <Property Type="Int32" Name="rental" />
+          <Property Type="Int32" Name="mortgage_monthly" Nullable="true" />
         </EntityType>
         <Association Name="FK_Property_Evaluations_Property_evaluations">
           <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="1" />
@@ -738,6 +744,9 @@
           <EntitySetMapping Name="Property_Evaluation">
             <EntityTypeMapping TypeName="AltairScopeModel.Property_Evaluation">
               <MappingFragment StoreEntitySet="Property_Evaluations">
+                <ScalarProperty Name="mortgage_monthly" ColumnName="mortgage_monthly" />
+                <ScalarProperty Name="rental" ColumnName="rental" />
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="initial_cash" ColumnName="initial_cash" />
                 <ScalarProperty Name="vacancy_ratio_subsequent_years" ColumnName="vacancy_ratio_subsequent_years" />
                 <ScalarProperty Name="vacancy_ratio_first_year" ColumnName="vacancy_ratio_first_year" />

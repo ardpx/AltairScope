@@ -72,6 +72,7 @@
     <Compile Include="DecisionStatusType.cs">
       <DependentUpon>AltairScopeEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\Neighbourhood.cs" />
     <Compile Include="Extensions\Property.cs" />
     <Compile Include="Services\PropertyEvaluator.cs" />
     <Compile Include="Extensions\User.cs" />
