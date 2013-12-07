@@ -73,7 +73,8 @@ namespace AltairScope.Controllers
             }
             catch
             {
-                return View();
+				throw;
+                //return View("Error");
             }
         }
 
@@ -175,7 +176,6 @@ namespace AltairScope.Controllers
 				};
 				property.Property_Sale.availability = changeStatusPropertyViewModel.Availability;
 				property.Property_Change_Histories.Add(history);
-				property.Last_Property_Change = history;
 			}
 
 			if (property.Property_Sale.status != changeStatusPropertyViewModel.DecisionStatus)
@@ -190,7 +190,6 @@ namespace AltairScope.Controllers
 				};
 				property.Property_Sale.status = changeStatusPropertyViewModel.DecisionStatus;
 				property.Property_Change_Histories.Add(history);
-				property.Last_Property_Change = history;
 			}
 
 			if (property.Property_Sale.price != changeStatusPropertyViewModel.Price)
@@ -205,7 +204,6 @@ namespace AltairScope.Controllers
 				};
 				property.Property_Sale.price = changeStatusPropertyViewModel.Price;
 				property.Property_Change_Histories.Add(history);
-				property.Last_Property_Change = history;
 			}
 
 			if (property.Property_Sale.offer_price != changeStatusPropertyViewModel.OfferPrice)
@@ -221,7 +219,6 @@ namespace AltairScope.Controllers
 				property.Property_Sale.offer_price = changeStatusPropertyViewModel.OfferPrice;
 				property.Property_Sale.offer_date = currentDateTime;
 				property.Property_Change_Histories.Add(history);
-				property.Last_Property_Change = history;
 			}
 
 			WebAppContext.Current.Commit();

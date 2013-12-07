@@ -306,7 +306,6 @@ namespace AltairScope.DomainModels.Services
 				updated_by = 2
 			};
 			_Property.Property_Change_Histories.Add(changeHistory);
-			_Property.Last_Property_Change = changeHistory;
 		}
 	}
 }

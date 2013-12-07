@@ -13,10 +13,6 @@
           <EntitySet Name="Property_Evaluations" EntityType="AltairScopeModel.Store.Property_Evaluations" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Property_Sales" EntityType="AltairScopeModel.Store.Property_Sales" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="AltairScopeModel.Store.Users" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Properties_Property_Change_Histories" Association="AltairScopeModel.Store.FK_Properties_Property_Change_Histories">
-            <End Role="Property_Change_Histories" EntitySet="Property_Change_Histories" />
-            <End Role="Properties" EntitySet="Properties" />
-          </AssociationSet>
           <AssociationSet Name="FK_Properties_Users" Association="AltairScopeModel.Store.FK_Properties_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Properties" EntitySet="Properties" />
@@ -98,7 +94,6 @@
           <Property Name="zillow_growth_rate" Type="decimal" Precision="6" Scale="4" />
           <Property Name="create_date" Type="datetime" />
           <Property Name="created_by" Type="int" />
-          <Property Name="last_update_id" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Property_Change_Histories">
           <Key>
@@ -190,18 +185,6 @@
           <Property Name="password" Type="nvarchar" MaxLength="100" />
           <Property Name="is_activated" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Properties_Property_Change_Histories">
-          <End Role="Property_Change_Histories" Type="AltairScopeModel.Store.Property_Change_Histories" Multiplicity="0..1" />
-          <End Role="Properties" Type="AltairScopeModel.Store.Properties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Property_Change_Histories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Properties">
-              <PropertyRef Name="last_update_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Properties_Users">
           <End Role="Users" Type="AltairScopeModel.Store.Users" Multiplicity="0..1" />
           <End Role="Properties" Type="AltairScopeModel.Store.Properties" Multiplicity="*" />
@@ -332,10 +315,6 @@
             <End Role="Neighbourhood" EntitySet="Neighbourhoods" />
             <End Role="Property" EntitySet="Properties" />
           </AssociationSet>
-          <AssociationSet Name="FK_Properties_Property_Change_Histories" Association="AltairScopeModel.FK_Properties_Property_Change_Histories">
-            <End Role="Property_Change_History" EntitySet="Property_Change_History" />
-            <End Role="Property" EntitySet="Properties" />
-          </AssociationSet>
           <AssociationSet Name="FK_Properties_Users" Association="AltairScopeModel.FK_Properties_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Property" EntitySet="Properties" />
@@ -371,8 +350,6 @@
           <NavigationProperty Name="Neighbourhood" Relationship="AltairScopeModel.FK_Properties_Neighbourhood" FromRole="Property" ToRole="Neighbourhood" />
           <Property Type="DateTime" Name="create_date" Precision="3" />
           <Property Type="Int32" Name="created_by" />
-          <Property Type="Guid" Name="last_update_id" />
-          <NavigationProperty Name="Last_Property_Change" Relationship="AltairScopeModel.FK_Properties_Property_Change_Histories" FromRole="Property" ToRole="Property_Change_History" />
           <NavigationProperty Name="Creator" Relationship="AltairScopeModel.FK_Properties_Users" FromRole="Property" ToRole="User" />
           <Property Type="Int32" Name="bed" />
           <Property Type="Decimal" Name="addition_total_ratio" Precision="5" Scale="4" />
@@ -425,7 +402,6 @@
           <Property Type="Int32" Name="updated_by" Nullable="false" />
           <NavigationProperty Name="Property" Relationship="AltairScopeModel.FK_Property_Change_Histories_Properties" FromRole="Property_Change_Histories" ToRole="Property" />
           <NavigationProperty Name="User" Relationship="AltairScopeModel.FK_Property_Change_Histories_Users" FromRole="Property_Change_Histories" ToRole="User" />
-          <NavigationProperty Name="Properties" Relationship="AltairScopeModel.FK_Properties_Property_Change_Histories" FromRole="Property_Change_History" ToRole="Property" />
           <Property Type="AltairScopeModel.ChangeType" Name="change_type" />
         </EntityType>
         <EntityType Name="Property_Comment">
@@ -611,18 +587,6 @@
           <Member Name="NOT_DECIDED" Value="-1" />
           <Member Name="UNABLE_TO_OFFER" Value="8" />
         </EnumType>
-        <Association Name="FK_Properties_Property_Change_Histories">
-          <End Type="AltairScopeModel.Property_Change_History" Role="Property_Change_History" Multiplicity="0..1" />
-          <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Property_Change_History">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Property">
-              <PropertyRef Name="last_update_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Properties_Users">
           <End Type="AltairScopeModel.User" Role="User" Multiplicity="0..1" />
           <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="*" />
@@ -655,7 +619,6 @@
               <MappingFragment StoreEntitySet="Properties">
                 <ScalarProperty Name="addition_total_ratio" ColumnName="addition_total_ratio" />
                 <ScalarProperty Name="bed" ColumnName="bed" />
-                <ScalarProperty Name="last_update_id" ColumnName="last_update_id" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="id" ColumnName="id" />

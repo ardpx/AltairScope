@@ -14,7 +14,7 @@ namespace AltairScope.DomainModels.Services
 		{
 			var db = appContext.GetPersistenceContext();
 			DbQuery<Property> query = GetQuery(db, eagerLoadMode);
-			var orderedQuery = query.OrderByDescending(q => q.last_update_id);
+			var orderedQuery = query.OrderByDescending(q => q.Property_Change_Histories.Max(ch => ch.updated_date));
 			List<Property> propertyList;
 			if (where != null)
 				propertyList = orderedQuery.Where(where).ToList();

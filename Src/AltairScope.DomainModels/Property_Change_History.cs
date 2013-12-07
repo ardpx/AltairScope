@@ -14,11 +14,6 @@ namespace AltairScope.DomainModels
     
     public partial class Property_Change_History
     {
-        public Property_Change_History()
-        {
-            this.Properties = new HashSet<Property>();
-        }
-    
         public System.Guid id { get; set; }
         public Nullable<System.Guid> property_id { get; set; }
         public string change_content { get; set; }
@@ -30,6 +25,5 @@ namespace AltairScope.DomainModels
     
         public virtual Property Property { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<Property> Properties { get; set; }
     }
 }

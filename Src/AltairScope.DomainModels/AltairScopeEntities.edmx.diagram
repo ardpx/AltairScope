@@ -15,11 +15,10 @@
         <AssociationConnector Association="AltairScopeModel.FK_Property_Comments_Properties" />
         <AssociationConnector Association="AltairScopeModel.FK_Property_Change_Histories_Users" />
         <AssociationConnector Association="AltairScopeModel.FK_Property_Comments_Users" />
-        <EntityTypeShape EntityType="AltairScopeModel.Property_Evaluation" Width="1.5" PointX="3.25" PointY="1.5" />
+        <EntityTypeShape EntityType="AltairScopeModel.Property_Evaluation" Width="1.5" PointX="3.25" PointY="1.125" />
         <AssociationConnector Association="AltairScopeModel.FK_Property_Evaluations_Property_evaluations" />
         <EntityTypeShape EntityType="AltairScopeModel.Neighbourhood" Width="1.5" PointX="6.875" PointY="13.125" />
         <AssociationConnector Association="AltairScopeModel.FK_Properties_Neighbourhood" />
-        <AssociationConnector Association="AltairScopeModel.FK_Properties_Property_Change_Histories" />
         <AssociationConnector Association="AltairScopeModel.FK_Properties_Users" />
       </Diagram>
     </edmx:Diagrams>

@@ -41,7 +41,6 @@ namespace AltairScope.DomainModels
         public Nullable<decimal> zillow_growth_rate { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public Nullable<int> created_by { get; set; }
-        public Nullable<System.Guid> last_update_id { get; set; }
         public Nullable<int> bed { get; set; }
         public Nullable<decimal> addition_total_ratio { get; set; }
     
@@ -50,7 +49,6 @@ namespace AltairScope.DomainModels
         public virtual ICollection<Property_Comment> Property_Comments { get; set; }
         public virtual Property_Evaluation Property_Evaluation { get; set; }
         public virtual Neighbourhood Neighbourhood { get; set; }
-        public virtual Property_Change_History Last_Property_Change { get; set; }
         public virtual User Creator { get; set; }
     }
 }

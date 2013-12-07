@@ -29,7 +29,6 @@ namespace AltairScope.DomainModels
 			};
 
 			this.Property_Change_Histories.Add(changeHistory);
-			this.Last_Property_Change = changeHistory;
 
 			if (this.id == Guid.Empty)
 			{
@@ -85,6 +84,8 @@ namespace AltairScope.DomainModels
 
 		private void _RecordCreationInfo()
 		{
+			this.Property_Evaluation = new Property_Evaluation();
+			this.Property_Sale.status = DecisionStatusType.NOT_DECIDED;
 			create_date = DateTime.Now;
 			created_by = 2; 
 		}
