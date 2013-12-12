@@ -586,6 +586,7 @@
           <Member Name="REJECTED" Value="7" />
           <Member Name="NOT_DECIDED" Value="-1" />
           <Member Name="UNABLE_TO_OFFER" Value="8" />
+          <Member Name="BACKED_OUT" Value="9" />
         </EnumType>
         <Association Name="FK_Properties_Users">
           <End Type="AltairScopeModel.User" Role="User" Multiplicity="0..1" />

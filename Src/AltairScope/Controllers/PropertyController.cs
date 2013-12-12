@@ -35,7 +35,9 @@ namespace AltairScope.Controllers
 			{
 				condition = p => p.Property_Sale.status != DecisionStatusType.UNABLE_TO_OFFER &&
 								 p.Property_Sale.status != DecisionStatusType.REJECTED &&
-								 //p.Property_Sale.status != DecisionStatusType.NOT_TO_OFFER &&
+								 p.Property_Sale.status != DecisionStatusType.BACKED_OUT &&
+								 p.Property_Sale.status != DecisionStatusType.NOT_TO_OFFER &&
+								 p.Property_Sale.price <= (p.fmv_mean + 15000) &&
 								 p.Property_Sale.cash_flow_mean > 500;
 			}
 			var propertyList = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Neighbourhood, condition);

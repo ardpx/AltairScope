@@ -22,6 +22,7 @@ namespace AltairScope.DomainModels
         BOUGHT = 6,
         REJECTED = 7,
         NOT_DECIDED = -1,
-        UNABLE_TO_OFFER = 8
+        UNABLE_TO_OFFER = 8,
+        BACKED_OUT = 9
     }
 }

@@ -98,7 +98,7 @@ namespace AltairScope.Models
 		public int? Rental_Zilpy { set; get; }
 
 		[Display(Name = "Zillow Growth Rate", Order = 21)]
-		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		//[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
 		public decimal? ZillowGrowthRate { set; get; }
 	}
 

@@ -22,7 +22,7 @@ namespace AltairScope.Services
 					propertyViewModel.DecisionStatus = property.Property_Sale.status.Value.ToString().Replace("_", " ");
 					propertyViewModel.Address = property.address;
 					propertyViewModel.SaleType = property.Property_Sale.type.ToString().Replace("_", " ");
-					propertyViewModel.Score = property.Property_Sale.score.Value;
+					propertyViewModel.Score = property.Property_Sale.score ?? 0;
 					propertyViewModel.Availability = property.Property_Sale.availability.ToString().Replace("_", " ");
 					propertyViewModel.Url_Redfin = property.Property_Sale.url_redfin;
 					propertyViewModel.Url_Zillow = property.Property_Sale.url_zillow;
@@ -33,8 +33,8 @@ namespace AltairScope.Services
 					propertyViewModel.Price_Fmv_Diff = property.Property_Sale.list_fmv_diff.Value;
 					propertyViewModel.Hoa = property.hoa;
 					propertyViewModel.Rent_Mean = property.rental_mean.Value;
-					propertyViewModel.Return_Rate_Mean = property.Property_Sale.return_rate_mean.Value;
-					propertyViewModel.Cash_Flow_Mean = property.Property_Sale.cash_flow_mean.Value;
+					propertyViewModel.Return_Rate_Mean = property.Property_Sale.return_rate_mean?? 0;
+					propertyViewModel.Cash_Flow_Mean = property.Property_Sale.cash_flow_mean ?? 0;
 					if (property.Neighbourhood != null)
 						propertyViewModel.Neighbourhood = property.Neighbourhood.name;
 
@@ -74,6 +74,10 @@ namespace AltairScope.Services
 
 			editPropertyViewModel.Price = property.Property_Sale.price;
 			editPropertyViewModel.Hoa = property.hoa;
+
+			editPropertyViewModel.TaxableTax = property.taxable_tax;
+			editPropertyViewModel.TaxableAdditions = property.taxable_additions;
+			editPropertyViewModel.TaxableTotal = property.taxable_total;
 
 			editPropertyViewModel.FMV_Zestimate = property.fmv_zestimate;
 			editPropertyViewModel.FMV_Smartzip = property.fmv_smartzip;
