@@ -197,6 +197,7 @@
 
 	<script>
 		var checkNeighbourhoodUrl = "@Url.Action("Check", "Neighbourhood")";
+		var checkPropertyAddressUrl = "@Url.Action("CheckAddress", "Property")";
 		$(document).ready(function () {
 			$("#checkNeighbourhood").click(function () {
 				$("#checkNeighbourhood").text("Checking");
@@ -214,6 +215,25 @@
 				}).error(function () {
 					$("#checkNeighbourhood").text("Check");
 					alert("no matched neighbourhood");
+				});
+			});
+
+			$("#Address").on('blur', function () {
+				var address = $("#Address").val();
+				if (address == null)
+					return;
+				var postData = { "address": address };
+				$.ajax({
+					type: "GET",
+					url: checkPropertyAddressUrl,
+					data: postData,
+					dataType: "json"
+				}).done(function (data) {
+					if (data.exist) {
+						alert("This property has been added");
+					} 
+				}).error(function () {
+					alert("Internal error occurs");
 				});
 			});
 		});

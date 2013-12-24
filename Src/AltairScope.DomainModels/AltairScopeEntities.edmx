@@ -150,6 +150,7 @@
           <Property Name="price" Type="int" />
           <Property Name="rental" Type="int" />
           <Property Name="mortgage_monthly" Type="int" />
+          <Property Name="loan_rate" Type="decimal" Precision="5" Scale="4" />
         </EntityType>
         <EntityType Name="Property_Sales">
           <Key>
@@ -172,6 +173,7 @@
           <Property Name="url_redfin" Type="nvarchar" MaxLength="500" />
           <Property Name="url_ziprealty" Type="nvarchar" MaxLength="500" />
           <Property Name="list_fmv_diff" Type="int" />
+          <Property Name="remark" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -376,6 +378,7 @@
           <Property Type="String" Name="url_redfin" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="url_ziprealty" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="list_fmv_diff" />
+          <Property Type="String" Name="remark" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Property_Sales_Property">
           <End Role="Properties" Type="AltairScopeModel.Property" Multiplicity="1" />
@@ -512,6 +515,7 @@
           <Property Type="Int32" Name="price" />
           <Property Type="Int32" Name="rental" />
           <Property Type="Int32" Name="mortgage_monthly" Nullable="true" />
+          <Property Type="Decimal" Name="loan_rate" Precision="5" Scale="4" />
         </EntityType>
         <Association Name="FK_Property_Evaluations_Property_evaluations">
           <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="1" />
@@ -647,6 +651,7 @@
           <EntitySetMapping Name="Property_Sale">
             <EntityTypeMapping TypeName="AltairScopeModel.Property_Sale">
               <MappingFragment StoreEntitySet="Property_Sales">
+                <ScalarProperty Name="remark" ColumnName="remark" />
                 <ScalarProperty Name="list_fmv_diff" ColumnName="list_fmv_diff" />
                 <ScalarProperty Name="url_ziprealty" ColumnName="url_ziprealty" />
                 <ScalarProperty Name="url_redfin" ColumnName="url_redfin" />
@@ -708,6 +713,7 @@
           <EntitySetMapping Name="Property_Evaluation">
             <EntityTypeMapping TypeName="AltairScopeModel.Property_Evaluation">
               <MappingFragment StoreEntitySet="Property_Evaluations">
+                <ScalarProperty Name="loan_rate" ColumnName="loan_rate" />
                 <ScalarProperty Name="mortgage_monthly" ColumnName="mortgage_monthly" />
                 <ScalarProperty Name="rental" ColumnName="rental" />
                 <ScalarProperty Name="price" ColumnName="price" />

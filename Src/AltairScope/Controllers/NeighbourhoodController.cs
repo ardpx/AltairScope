@@ -57,9 +57,14 @@ namespace AltairScope.Controllers
             }
             catch
             {
-                return View();
+                throw;
             }
         }
+
+		public ActionResult View(Guid id)
+		{
+			return View();
+		}
 
         //
         // GET: /Neigbourhood/Edit/5
@@ -83,7 +88,7 @@ namespace AltairScope.Controllers
             }
             catch
             {
-                return View();
+				throw;
             }
         }
 

@@ -80,6 +80,14 @@ namespace AltairScope.Controllers
             }
         }
 
+		public JsonResult CheckAddress(string address)
+		{
+			_propertyDataServices = new PropertyDataServices();
+			var existProperty = _propertyDataServices.GetPropertyByAddress(WebAppContext.Current, address.Trim());
+
+			return Json(new { exist = existProperty }, JsonRequestBehavior.AllowGet);
+		}
+
 		//
         // GET: /Property/Edit/5
 
@@ -134,12 +142,12 @@ namespace AltairScope.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Evaluate(Guid id, int EvaluatePrice = 0, int EvaluateRental = 0, string FixedVacancy = "true")
+		public ActionResult Evaluate(Guid id, int EvaluatePrice = 0, int EvaluateRental = 0, string FixedVacancy = "true", decimal EvaluateLoanRate = 0m)
 		{
 			_propertyDataServices = new PropertyDataServices();
 			var property = _propertyDataServices.GetPropertyById(WebAppContext.Current, id, PropertyEagerLoadMode.Sale_Evaluation_Neighbourhood);
 
-			PropertyEvaluator evaluator = new PropertyEvaluator(EvaluatePrice, EvaluateRental, bool.Parse(FixedVacancy.ToString()));
+			PropertyEvaluator evaluator = new PropertyEvaluator(EvaluatePrice, EvaluateRental, bool.Parse(FixedVacancy.ToString()), EvaluateLoanRate);
 			evaluator.Evaluate(property);
 			WebAppContext.Current.Commit();
 
@@ -166,6 +174,7 @@ namespace AltairScope.Controllers
 			var currentDateTime = DateTime.Now;
 			_propertyDataServices = new PropertyDataServices();
 			var property = _propertyDataServices.GetPropertyById(WebAppContext.Current, changeStatusPropertyViewModel.Id, PropertyEagerLoadMode.Sale);
+			property.Property_Sale.remark = changeStatusPropertyViewModel.Remark;
 			if (property.Property_Sale.availability != changeStatusPropertyViewModel.Availability)
 			{
 				var history = new Property_Change_History()
@@ -238,7 +247,7 @@ namespace AltairScope.Controllers
 			{
 				property.ValidateAndSave();
 
-				PropertyEvaluator evaluator = new PropertyEvaluator(0, 0, false);
+				PropertyEvaluator evaluator = new PropertyEvaluator(0, 0, false, 0m);
 				evaluator.Evaluate(property);
 				WebAppContext.Current.Commit();
 				i++;

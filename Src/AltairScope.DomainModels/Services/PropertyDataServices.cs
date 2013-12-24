@@ -50,6 +50,13 @@ namespace AltairScope.DomainModels.Services
 			}
 			return query;
 		}
+
+		public bool GetPropertyByAddress(IAppContext appContext, string address)
+		{
+			var db = appContext.GetPersistenceContext();
+			var query = GetQuery(db, PropertyEagerLoadMode.None).Where(p => p.address == address);
+			return query.Any();
+		}
 	}
 
 	public enum PropertyEagerLoadMode

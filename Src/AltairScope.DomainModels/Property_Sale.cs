@@ -31,6 +31,7 @@ namespace AltairScope.DomainModels
         public string url_redfin { get; set; }
         public string url_ziprealty { get; set; }
         public Nullable<int> list_fmv_diff { get; set; }
+        public string remark { get; set; }
     
         public virtual Property Property { get; set; }
     }

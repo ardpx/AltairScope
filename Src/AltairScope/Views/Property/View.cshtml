@@ -61,9 +61,9 @@
         </div>
         <div class="editor-field wide-field">
 			@if (!string.IsNullOrEmpty(@Model.Url_Redfin))
-   {
+			{
 			<a href="@Model.Url_Redfin">@Model.Url_Redfin</a>
-   }
+			}
         </div>
 
         <div class="editor-label">
@@ -266,10 +266,16 @@
 			@Html.Partial("_Evaluate", Model)
 		</div>
 		
-		
-
-		
-       
+		@if(!string.IsNullOrEmpty(Model.Remark))
+		{
+		<div class="editor-label">
+            @Html.LabelFor(model => model.Remark)
+		</div>
+		<div class="editor-field">
+			@Html.TextAreaFor(model => model.Remark)
+			@Html.ValidationMessageFor(model => model.Remark)
+		</div>
+		}
     </fieldset>
 
 

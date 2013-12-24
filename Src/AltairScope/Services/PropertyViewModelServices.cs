@@ -37,7 +37,7 @@ namespace AltairScope.Services
 					propertyViewModel.Cash_Flow_Mean = property.Property_Sale.cash_flow_mean ?? 0;
 					if (property.Neighbourhood != null)
 						propertyViewModel.Neighbourhood = property.Neighbourhood.name;
-
+					propertyViewModel.Remark = property.Property_Sale.remark;
 					propertyViewModelList.Add(propertyViewModel);
 				}
 			}
@@ -96,7 +96,7 @@ namespace AltairScope.Services
 		{
 			var propertySale = property.Property_Sale;
 
-			property.address = editPropertyViewModel.Address;
+			property.address = editPropertyViewModel.Address.Trim();
 			property.neighbourhood_id = new Guid(editPropertyViewModel.Neighbourhood);
 			propertySale.type = editPropertyViewModel.SaleType;
 			propertySale.availability = editPropertyViewModel.Availability;
@@ -170,6 +170,7 @@ namespace AltairScope.Services
 			MapDomainModelToViewableViewModelForEvaluation(property, viewablePropertyViewModel);
 
 			viewablePropertyViewModel.DecisionStatus = property.Property_Sale.status ?? DecisionStatusType.NOT_DECIDED;
+			viewablePropertyViewModel.Remark = property.Property_Sale.remark;
 
 			return viewablePropertyViewModel;
 		}
@@ -195,6 +196,7 @@ namespace AltairScope.Services
 			viewablePropertyViewModel.EvaluatePrice = property.Property_Evaluation.price;
 			viewablePropertyViewModel.EvaluateRental = property.Property_Evaluation.rental;
 			viewablePropertyViewModel.MortgageMonthly = property.Property_Evaluation.mortgage_monthly;
+			viewablePropertyViewModel.EvaluateLoanRate = property.Property_Evaluation.loan_rate;
 			
 			viewablePropertyViewModel.ReturnRateList = new List<decimal?>();
 			viewablePropertyViewModel.CashFlowList = new List<int?>();
@@ -239,8 +241,8 @@ namespace AltairScope.Services
 				Availability = property.Property_Sale.availability,
 				DecisionStatus = property.Property_Sale.status.Value,
 				OfferPrice = property.Property_Sale.offer_price,
-				Url_Redfin = property.Property_Sale.url_redfin
-				
+				Url_Redfin = property.Property_Sale.url_redfin,
+				Remark = property.Property_Sale.remark
 			};
 			return changeStatusPropertyViewModel;
 		}

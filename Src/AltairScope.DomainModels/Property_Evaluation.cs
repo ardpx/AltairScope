@@ -42,6 +42,7 @@ namespace AltairScope.DomainModels
         public Nullable<int> price { get; set; }
         public Nullable<int> rental { get; set; }
         public Nullable<int> mortgage_monthly { get; set; }
+        public Nullable<decimal> loan_rate { get; set; }
     
         public virtual Property Property { get; set; }
     }

@@ -27,6 +27,7 @@ namespace AltairScope.Models
 		public int Rent_Mean { set; get; }
 		public decimal Return_Rate_Mean { set; get; }
 		public int Cash_Flow_Mean { set; get; }
+		public string Remark { set; get; }
 	}
 
 	public class NewPropertyViewModel
@@ -175,8 +176,15 @@ namespace AltairScope.Models
 		[Display(Name = "Evaluate Rental", Order = 16)]
 		public int? EvaluateRental { set; get; }
 
-		[Display(Name = "Mortgage Monthly", Order = 16)]
+		[Display(Name = "Mortgage Monthly", Order = 17)]
 		public int? MortgageMonthly { set; get; }
+
+		[Display(Name = "Evaluate Loan Rate", Order = 18)]
+		[DisplayFormat(DataFormatString = "{0:0.0000}", ApplyFormatInEditMode = true)]
+		public decimal? EvaluateLoanRate { set; get; }
+
+		[Display(Name = "Remark", Order = 19)]
+		public string Remark { set; get; }
 	}
 
 	public class ChangeStatusPropertyViewModel
@@ -202,5 +210,8 @@ namespace AltairScope.Models
 
 		[Display(Name = "Url Redfin", Order = 1)]
 		public string Url_Redfin { set; get; }
+
+		[Display(Name = "Remark", Order = 6)]
+		public string Remark { set; get; }
 	}
 }

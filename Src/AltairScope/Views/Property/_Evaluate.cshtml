@@ -117,7 +117,15 @@
 			@Html.EditorFor(model => model.EvaluateRental)
 			@Html.ValidationMessageFor(model => model.EvaluateRental)  @string.Format("{0}", Model.EvaluateRental * 0.75)
 		</div> 
-	  
+	
+		<div class="editor-label">
+            @Html.LabelFor(model => model.EvaluateLoanRate)
+		</div>
+		<div class="editor-field">
+			@Html.EditorFor(model => model.EvaluateLoanRate)
+			@Html.ValidationMessageFor(model => model.EvaluateLoanRate)
+		</div> 
+	
 		<div class="editor-label">
             <label for="FixedVacancy">Fixed Vacancy Ratio</label>
 		</div>

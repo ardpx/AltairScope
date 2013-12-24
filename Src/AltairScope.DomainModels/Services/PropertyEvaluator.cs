@@ -15,7 +15,7 @@ namespace AltairScope.DomainModels.Services
 
 		private decimal _LoanToValue = 0.80m;
 
-		private decimal _LoanInterestRate = 0.04875m;
+		private decimal _LoanInterestRate = 0.0575m; //0.04875m;
 
 		private int _TermsOfLoan_Months = 360;
 
@@ -27,7 +27,7 @@ namespace AltairScope.DomainModels.Services
 
 		private int _PropertyTax_Annual;
 
-		private double _ManagementFeeRatio_Annual = 0.1d;
+		private double _ManagementFeeRatio_Annual = 0.06d; //0.1d;
 
 		private double _RepairFeeRatio_Annual = 0.1d;
 
@@ -50,7 +50,8 @@ namespace AltairScope.DomainModels.Services
 		private double _CapticalGainsTaxRate = 0.15d;
 
 		private double _DepreciationRecapture = 0.25d;
-		
+
+		private int _Insurance_Annual = 660;
 
 		private Property _Property = null;
 		private Property_Sale _PropertySale = null;
@@ -81,11 +82,13 @@ namespace AltairScope.DomainModels.Services
 		{
 		}
 
-		public PropertyEvaluator(int price, int rental_monthly, bool fixed_vacancy_ratio)
+		public PropertyEvaluator(int price, int rental_monthly, bool fixed_vacancy_ratio, decimal loanInterestRate)
 		{
 			_Price = price;
 			_Rental_Annual = rental_monthly * 12;
 			_Fixed_Vacancy_Ratio = fixed_vacancy_ratio;
+			if (loanInterestRate != 0)
+				_LoanInterestRate = loanInterestRate;
 		}
 
 		public void Evaluate(Property property)
@@ -123,8 +126,8 @@ namespace AltairScope.DomainModels.Services
 				FirstYearVacancy = _Neighbourhood.vacancy_ratio > 0.1666m ? (double)(_Neighbourhood.vacancy_ratio + 0.1666m) / 2 : 0.1666d;
 				SubsequentYearVacancy = _Neighbourhood.vacancy_ratio > 0.0833m ? (double)(_Neighbourhood.vacancy_ratio + 0.0833m) / 2 : 0.0833d;
 			}
-				_PropertyTax_Annual = _PropertySale.tax;
-			_AdditionalExpense_Annual = _Property.hoa;
+			_PropertyTax_Annual = _PropertySale.tax;
+			_AdditionalExpense_Annual = _Property.hoa + _Insurance_Annual;
 			_DepreciationRatio = (double)(_Property.addition_total_ratio ?? 0.75m);
 
 		}
@@ -272,6 +275,7 @@ namespace AltairScope.DomainModels.Services
 			propertyEvaluation.price = _Price;
 			propertyEvaluation.rental = _Rental_Annual / 12;
 			propertyEvaluation.mortgage_monthly = (int)(_MortgagePayment_Annual / 12d);
+			propertyEvaluation.loan_rate = _LoanInterestRate;
 
 			propertyEvaluation.cash_flow_y1 = (int)CashflowAfterTax[0];
 			propertyEvaluation.cash_flow_y2 = (int)CashflowAfterTax[1];

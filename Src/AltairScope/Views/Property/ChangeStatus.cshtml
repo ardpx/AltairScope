@@ -65,6 +65,14 @@
             @Html.ValidationMessageFor(model => model.OfferPrice)
         </div>
 
+		<div class="editor-label">
+            @Html.LabelFor(model => model.Remark)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Remark)
+            @Html.ValidationMessageFor(model => model.Remark)
+        </div>
+
         <p>
             <input type="submit" value="Change" />
         </p>
