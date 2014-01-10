@@ -38,6 +38,11 @@ namespace AltairScope.Services
 					if (property.Neighbourhood != null)
 						propertyViewModel.Neighbourhood = property.Neighbourhood.name;
 					propertyViewModel.Remark = property.Property_Sale.remark;
+					if (property.Property_Sale.listing_date != null)
+					{
+						propertyViewModel.ListingDaysCount = (int)DateTime.Today.Subtract(property.Property_Sale.listing_date.Value).TotalDays;
+					}
+
 					propertyViewModelList.Add(propertyViewModel);
 				}
 			}
@@ -89,6 +94,11 @@ namespace AltairScope.Services
 
 			editPropertyViewModel.ZillowGrowthRate = property.zillow_growth_rate;
 
+			if (property.Property_Sale.listing_date != null)
+			{
+				editPropertyViewModel.ListingDaysCount = (int)DateTime.Today.Subtract(property.Property_Sale.listing_date.Value).TotalDays;
+			}
+
 			return editPropertyViewModel;
 		}
 
@@ -123,6 +133,11 @@ namespace AltairScope.Services
 			property.rental_zilpy = editPropertyViewModel.Rental_Zilpy;
 
 			property.zillow_growth_rate = editPropertyViewModel.ZillowGrowthRate;
+
+			if (editPropertyViewModel.ListingDaysCount != 0)
+			{
+				propertySale.listing_date = DateTime.Today.AddDays(0 - editPropertyViewModel.ListingDaysCount);
+			}
 		}
 
 		public ViewablePropertyViewModel ConvertToViewableViewModel(Property property)
@@ -130,8 +145,13 @@ namespace AltairScope.Services
 			var viewablePropertyViewModel = new ViewablePropertyViewModel();
 
 			viewablePropertyViewModel.Id = property.id;
-			viewablePropertyViewModel.Neighbourhood = property.Neighbourhood != null ? property.Neighbourhood.name : null;
-			viewablePropertyViewModel.NeighbourhoodUrl = property.Neighbourhood != null ? property.Neighbourhood.url : null;
+			if (property.Neighbourhood != null)
+			{
+				viewablePropertyViewModel.Neighbourhood = property.Neighbourhood.name;
+				viewablePropertyViewModel.NeighbourhoodVacancy = property.Neighbourhood.vacancy_ratio;
+				viewablePropertyViewModel.NeighbourhoodUrl = property.Neighbourhood.url;
+				
+			}
 			viewablePropertyViewModel.Address = property.address;
 			viewablePropertyViewModel.SaleType = property.Property_Sale.type;
 			viewablePropertyViewModel.Availability = property.Property_Sale.availability;
@@ -172,6 +192,11 @@ namespace AltairScope.Services
 			viewablePropertyViewModel.DecisionStatus = property.Property_Sale.status ?? DecisionStatusType.NOT_DECIDED;
 			viewablePropertyViewModel.Remark = property.Property_Sale.remark;
 
+			if (property.Property_Sale.listing_date != null)
+			{
+				viewablePropertyViewModel.ListingDaysCount = (int)DateTime.Today.Subtract(property.Property_Sale.listing_date.Value).TotalDays;
+			}
+
 			return viewablePropertyViewModel;
 		}
 
@@ -184,6 +209,7 @@ namespace AltairScope.Services
 
 		private void MapDomainModelToViewableViewModelForEvaluation(Property property, ViewablePropertyViewModel viewablePropertyViewModel)
 		{
+			viewablePropertyViewModel.Price = property.Property_Sale.price;
 			viewablePropertyViewModel.InitialCash = property.Property_Evaluation.initial_cash;
 			viewablePropertyViewModel.EstimatedAppreciationRate = property.Property_Evaluation.appreciation_rate;
 			viewablePropertyViewModel.VacancyFirstYear = property.Property_Evaluation.vacancy_ratio_first_year;

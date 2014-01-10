@@ -18,18 +18,28 @@
             @Html.LabelFor(model => model.Address)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
+            @Html.DisplayFor(model => model.Address)
+        </div>
+
+		 <div class="editor-label">
+            @Html.LabelFor(model => model.ListingDaysCount)
+        </div>
+        <div class="editor-field wide-field">
+            @Html.DisplayFor(model => model.ListingDaysCount)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Neighbourhood)
         </div>
         <div class="editor-field wide-field">
-            @Html.EditorFor(model => model.Neighbourhood)
-            @Html.ValidationMessageFor(model => model.Neighbourhood)
+            @Html.DisplayFor(model => model.Neighbourhood)
         </div>
-
+		<div class="editor-label">
+            @Html.LabelFor(model => model.NeighbourhoodVacancy)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.NeighbourhoodVacancy)
+        </div>
 		<div class="editor-label">
             @Html.LabelFor(model => model.NeighbourhoodUrl)
         </div>
@@ -39,7 +49,6 @@
 			<a href="@Model.NeighbourhoodUrl">@Model.NeighbourhoodUrl</a>
 			}
         </div>
-
 		<div class="editor-label">
             @Html.LabelFor(model => model.SaleType)
         </div>
@@ -47,7 +56,6 @@
             @Html.EnumDropDownListFor(model => model.SaleType, Model.SaleType)
             @Html.ValidationMessageFor(model => model.SaleType)
         </div>
-
 		<div class="editor-label">
             @Html.LabelFor(model => model.Availability)
         </div>
@@ -90,168 +98,131 @@
             @Html.LabelFor(model => model.Bed)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Bed)
-            @Html.ValidationMessageFor(model => model.Bed)
+            @Html.DisplayFor(model => model.Bed)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.SquareFoot)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.SquareFoot)
-            @Html.ValidationMessageFor(model => model.SquareFoot)
+            @Html.DisplayFor(model => model.SquareFoot)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Price)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
+            @Html.DisplayFor(model => model.Price)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.TaxRate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TaxRate)
-            @Html.ValidationMessageFor(model => model.TaxRate)
+            @Html.DisplayFor(model => model.TaxRate)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Tax)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Tax)
-            @Html.ValidationMessageFor(model => model.Tax)
+            @Html.DisplayFor(model => model.Tax)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.BuildingRatio)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.BuildingRatio)
-            @Html.ValidationMessageFor(model => model.BuildingRatio)
+            @Html.DisplayFor(model => model.BuildingRatio)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Hoa)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Hoa)
-            @Html.ValidationMessageFor(model => model.Hoa)
+            @Html.DisplayFor(model => model.Hoa)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.TaxableTax)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TaxableTax)
-            @Html.ValidationMessageFor(model => model.TaxableTax)
+            @Html.DisplayFor(model => model.TaxableTax)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.TaxableAdditions)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TaxableAdditions)
-            @Html.ValidationMessageFor(model => model.TaxableAdditions)
+            @Html.DisplayFor(model => model.TaxableAdditions)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.TaxableTotal)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TaxableTotal)
-            @Html.ValidationMessageFor(model => model.TaxableTotal)
+            @Html.DisplayFor(model => model.TaxableTotal)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FMV_Zestimate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FMV_Zestimate)
-            @Html.ValidationMessageFor(model => model.FMV_Zestimate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FMV_Smartzip)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FMV_Smartzip)
-            @Html.ValidationMessageFor(model => model.FMV_Smartzip)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FMV_Eappraisal)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FMV_Eappraisal)
-            @Html.ValidationMessageFor(model => model.FMV_Eappraisal)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FMV_Mean)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FMV_Mean)
-            @Html.ValidationMessageFor(model => model.FMV_Mean)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rental_Zrent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rental_Zrent)
-            @Html.ValidationMessageFor(model => model.Rental_Zrent)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rental_Rentometer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rental_Rentometer)
-            @Html.ValidationMessageFor(model => model.Rental_Rentometer)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rental_Zilpy)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rental_Zilpy)
-            @Html.ValidationMessageFor(model => model.Rental_Zilpy)
-        </div>
-
 		<div class="editor-label">
-            @Html.LabelFor(model => model.Rental_Mean)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rental_Mean)
-            @Html.ValidationMessageFor(model => model.Rental_Mean)
-        </div>
+			<label>Fair Market Value</label>
+		</div>
+		<div class="editor-field">
+			<table>
+				<th>
+					<td>Zestimate</td>
+					<td>Smartzip</td>
+					<td>Eappraisal</td>
+					<td>Mean</td>
+				</th>
+				<tr>
+					<td>FMV</td>
+					<td>@Model.FMV_Zestimate</td>
+					<td>@Model.FMV_Smartzip</td>
+					<td>@Model.FMV_Eappraisal</td>
+					<td>@Model.FMV_Mean</td>
+				</tr>
+			</table>
+		</div>
+		<div class="editor-label">
+			<label>Rental</label>
+		</div>
+		<div class="editor-field">
+			<table>
+				<th>
+					<td>Zrent</td>
+					<td>Rentometer</td>
+					<td>Zilpy</td>
+					<td>Mean</td>
+				</th>
+				<tr>
+					<td>Rental</td>
+					<td>@Model.Rental_Zrent</td>
+					<td>@Model.Rental_Rentometer</td>
+					<td>@Model.Rental_Zilpy</td>
+					<td>@Model.Rental_Mean</td>
+				</tr>
+			</table>
+		</div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ZillowGrowthRate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ZillowGrowthRate)
-            @Html.ValidationMessageFor(model => model.ZillowGrowthRate)
+            @Html.DisplayFor(model => model.ZillowGrowthRate)
         </div>
 
 		<div class="editor-label">
             @Html.LabelFor(model => model.OfferPrice)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.OfferPrice)
-            @Html.ValidationMessageFor(model => model.OfferPrice)
+            @Html.DisplayFor(model => model.OfferPrice)
         </div>
 
 		<div class="editor-label">
             @Html.LabelFor(model => model.OfferDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.OfferDate)
-            @Html.ValidationMessageFor(model => model.OfferDate)
+            @Html.DisplayFor(model => model.OfferDate)
         </div>
 		-------------------------------------------------------------
 		<div class="editor-label">
@@ -272,8 +243,7 @@
             @Html.LabelFor(model => model.Remark)
 		</div>
 		<div class="editor-field">
-			@Html.TextAreaFor(model => model.Remark)
-			@Html.ValidationMessageFor(model => model.Remark)
+			@Html.TextAreaFor(model => model.Remark, new { rows = 4, @readonly = true })
 		</div>
 		}
     </fieldset>
@@ -281,6 +251,9 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+	<br>
+	@Html.ActionLink("Edit", "Edit" , new {id = Model.Id})
+	@Html.ActionLink("Status", "ChangeStatus", new {id = Model.Id})
 </div>
 
 @section Scripts {

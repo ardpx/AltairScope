@@ -1,69 +1,69 @@
 ﻿@model AltairScope.Models.ViewablePropertyViewModel
 
+@{
+	bool useFixedVacancyRate = false;
+	if (Model.VacancySubsequentYear == 0.0833m)
+	{
+		useFixedVacancyRate = true;
+	}
+}
+
 @if(Model.ReturnRate_Mean != null)
 {
 	<div class="editor-label">
 		@Html.LabelFor(model => model.InitialCash)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.InitialCash)
-		@Html.ValidationMessageFor(model => model.InitialCash)
+		@Html.DisplayFor(model => model.InitialCash)
 	</div>
 	
 	<div class="editor-label">
 		@Html.LabelFor(model => model.EstimatedAppreciationRate)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.EstimatedAppreciationRate)
-		@Html.ValidationMessageFor(model => model.EstimatedAppreciationRate)
+		@Html.DisplayFor(model => model.EstimatedAppreciationRate)
 	</div>
 	
 	<div class="editor-label">
 		@Html.LabelFor(model => model.VacancyFirstYear)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.VacancyFirstYear)
-		@Html.ValidationMessageFor(model => model.VacancyFirstYear)
+		@Html.DisplayFor(model => model.VacancyFirstYear)
 	</div>
 	
 	<div class="editor-label">
 		@Html.LabelFor(model => model.VacancySubsequentYear)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.VacancySubsequentYear)
-		@Html.ValidationMessageFor(model => model.VacancySubsequentYear)
+		@Html.DisplayFor(model => model.VacancySubsequentYear)
 	</div>
 	
 	<div class="editor-label">
 		@Html.LabelFor(model => model.Score)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.Score)
-		@Html.ValidationMessageFor(model => model.Score)
+		@Html.DisplayFor(model => model.Score)
 	</div>
 
 	<div class="editor-label">
 		@Html.LabelFor(model => model.ReturnRate_Mean)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.ReturnRate_Mean)
-		@Html.ValidationMessageFor(model => model.ReturnRate_Mean)
+		@Html.DisplayFor(model => model.ReturnRate_Mean)
 	</div>
 
 	<div class="editor-label">
 		@Html.LabelFor(model => model.CashFlow_Mean)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.CashFlow_Mean)
-		@Html.ValidationMessageFor(model => model.CashFlow_Mean)
+		@Html.DisplayFor(model => model.CashFlow_Mean)
 	</div>
 	
 	<div class="editor-label">
 		@Html.LabelFor(model => model.MortgageMonthly)
 	</div>
 	<div class="editor-field">
-		@Html.EditorFor(model => model.MortgageMonthly)
-		@Html.ValidationMessageFor(model => model.MortgageMonthly)
+		@Html.DisplayFor(model => model.MortgageMonthly)
 	</div>
 
 	<div class="editor-label">
@@ -107,7 +107,7 @@
 		</div>
 		<div class="editor-field">
 			@Html.EditorFor(model => model.EvaluatePrice)
-			@Html.ValidationMessageFor(model => model.EvaluatePrice)
+			@Html.ValidationMessageFor(model => model.EvaluatePrice)  @string.Format("{0}", Model.Price)
 		</div>
 	  
 		<div class="editor-label">
@@ -115,7 +115,7 @@
 		</div>
 		<div class="editor-field">
 			@Html.EditorFor(model => model.EvaluateRental)
-			@Html.ValidationMessageFor(model => model.EvaluateRental)  @string.Format("{0}", Model.EvaluateRental * 0.75)
+			@Html.ValidationMessageFor(model => model.EvaluateRental)  @string.Format("{0}", Model.EvaluateRental * 0.5)
 		</div> 
 	
 		<div class="editor-label">
@@ -131,8 +131,8 @@
 		</div>
 		<div class="editor-field">
 			<select id="FixedVacancy" name="FixedVacancy" data-val="true">
-				<option value="true" selected ="selected">Yes</option>
-				<option value="false">No</option>
+				<option value="true" @( useFixedVacancyRate ? "selected =\"selected\"" : "")>Yes</option>
+				<option value="false" @( !useFixedVacancyRate ? "selected =\"selected\"" : "")>No</option>
 			</select>
 		</div>
 	  

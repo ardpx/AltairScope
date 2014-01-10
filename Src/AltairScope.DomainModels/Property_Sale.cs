@@ -32,6 +32,7 @@ namespace AltairScope.DomainModels
         public string url_ziprealty { get; set; }
         public Nullable<int> list_fmv_diff { get; set; }
         public string remark { get; set; }
+        public Nullable<System.DateTime> listing_date { get; set; }
     
         public virtual Property Property { get; set; }
     }

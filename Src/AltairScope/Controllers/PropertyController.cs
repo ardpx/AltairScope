@@ -27,9 +27,10 @@ namespace AltairScope.Controllers
 			Expression<Func<Property, bool>> condition = null;
 			if (show == "inProgress")
 			{
-				condition = p => //p.Property_Sale.status == DecisionStatusType.TO_OFFER ||
+				condition = p => p.Property_Sale.status == DecisionStatusType.NOTIFY_AGENT ||
 								 p.Property_Sale.status == DecisionStatusType.OFFER_ACCEPTED ||
-								 p.Property_Sale.status == DecisionStatusType.OFFERED;
+								 p.Property_Sale.status == DecisionStatusType.OFFERED ||
+								 p.Property_Sale.status == DecisionStatusType.TO_OFFER;
 			}
 			if (criteria == "good")
 			{
@@ -38,7 +39,9 @@ namespace AltairScope.Controllers
 								 p.Property_Sale.status != DecisionStatusType.BACKED_OUT &&
 								 p.Property_Sale.status != DecisionStatusType.NOT_TO_OFFER &&
 								 p.Property_Sale.price <= (p.fmv_mean + 15000) &&
-								 p.Property_Sale.cash_flow_mean > 500;
+								 p.Property_Sale.cash_flow_mean > 500 &&
+								 p.Property_Sale.return_rate_mean > 0.05m &&
+								 p.Property_Evaluation.rental * 0.6 > p.Property_Evaluation.mortgage_monthly;
 			}
 			var propertyList = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Neighbourhood, condition);
 

@@ -28,6 +28,7 @@ namespace AltairScope.Models
 		public decimal Return_Rate_Mean { set; get; }
 		public int Cash_Flow_Mean { set; get; }
 		public string Remark { set; get; }
+		public int ListingDaysCount { set; get; }
 	}
 
 	public class NewPropertyViewModel
@@ -99,8 +100,12 @@ namespace AltairScope.Models
 		public int? Rental_Zilpy { set; get; }
 
 		[Display(Name = "Zillow Growth Rate", Order = 21)]
-		//[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = false)]
 		public decimal? ZillowGrowthRate { set; get; }
+
+		[Display(Name = "Listing Days", Order = 7)]
+		public int ListingDaysCount { set; get; }
+
 	}
 
 	public class EditPropertyViewModel : NewPropertyViewModel
@@ -185,6 +190,10 @@ namespace AltairScope.Models
 
 		[Display(Name = "Remark", Order = 19)]
 		public string Remark { set; get; }
+
+		[Display(Name = "Neighbourhood Vacancy", Order = 20)]
+		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+		public decimal? NeighbourhoodVacancy { set; get; }
 	}
 
 	public class ChangeStatusPropertyViewModel

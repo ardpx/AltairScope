@@ -5,6 +5,11 @@
 }
 
 <h2>Edit Property</h2>
+<div>
+    @Html.ActionLink("View", "View" , new {id = Model.Id})
+	@Html.ActionLink("Status", "ChangeStatus", new {id = Model.Id})
+</div>
+<br>
 
 @using (Html.BeginForm("Edit", "Property", FormMethod.Post)) {
     @Html.AntiForgeryToken()
@@ -21,6 +26,14 @@
         <div class="editor-field wide-field">
             @Html.EditorFor(model => model.Address)
             @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.ListingDaysCount)
+        </div>
+        <div class="editor-field wide-field">
+            @Html.EditorFor(model => model.ListingDaysCount)
+            @Html.ValidationMessageFor(model => model.ListingDaysCount)
         </div>
 
         <div class="editor-label">
@@ -52,7 +65,11 @@
         </div>
         <div class="editor-field wide-field">
             @Html.EditorFor(model => model.Url_Redfin)
-            @Html.ValidationMessageFor(model => model.Url_Redfin)
+            @Html.ValidationMessageFor(model => model.Url_Redfin) 
+			@if (!string.IsNullOrEmpty(@Model.Url_Redfin))
+			{
+			<a href="@Model.Url_Redfin">Link</a>
+			}
         </div>
 
         <div class="editor-label">
@@ -61,6 +78,10 @@
         <div class="editor-field wide-field">
             @Html.EditorFor(model => model.Url_Zillow)
             @Html.ValidationMessageFor(model => model.Url_Zillow)
+			@if (!string.IsNullOrEmpty(@Model.Url_Zillow))
+			{
+			<a href="@Model.Url_Zillow">Link</a>
+			}
         </div>
 
         <div class="editor-label">
@@ -69,6 +90,10 @@
         <div class="editor-field wide-field">
             @Html.EditorFor(model => model.Url_Ziprealty)
             @Html.ValidationMessageFor(model => model.Url_Ziprealty)
+			@if (!string.IsNullOrEmpty(@Model.Url_Ziprealty))
+			{
+			<a href="@Model.Url_Ziprealty">Link</a>
+			}
         </div>
 
         <div class="editor-label">
@@ -126,7 +151,6 @@
             @Html.EditorFor(model => model.TaxableTotal)
             @Html.ValidationMessageFor(model => model.TaxableTotal)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.FMV_Zestimate)
         </div>

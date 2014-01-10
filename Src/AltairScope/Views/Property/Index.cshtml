@@ -7,11 +7,11 @@
 
 <style type="text/css">
 .content-wrapper {
-	max-width: 1280px !important;
+	max-width: 1540px !important;
 } 
 </style>
 
-<h2>Property List</h2>
+<h2>@Html.ActionLink("Property List", "Index")</h2>
 @Html.ActionLink("In Progress", "Index", new {show = "inProgress"}) | @Html.ActionLink("Match Criteria", "Index", new {criteria = "good"}) |
 
 @Ajax.ActionLink("Re-evaluate All", "ReEvaluateAll", "Property",
@@ -33,6 +33,7 @@
 		column.Add(p => p.Return_Rate_Mean).Titled("Return %").Format("{0:0.00%}").Sortable(true);
 		column.Add(p => p.Cash_Flow_Mean).Titled("Cash Flow").Format("{0:c0}").Sortable(true);
 		column.Add(p => p.Remark).Titled("Remark");
+		column.Add(p => p.ListingDaysCount).Titled("Days").Sortable(true);
 		column.Add(p => p.Id).Titled("Actions")
 							 .Sanitized(false).Encoded(false)
 							 .RenderValueAs(p => Html.ActionLink("Edit", "Edit", "Property", new { Id = p.Id }, null) + "" +

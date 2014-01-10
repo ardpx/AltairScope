@@ -174,6 +174,7 @@
           <Property Name="url_ziprealty" Type="nvarchar" MaxLength="500" />
           <Property Name="list_fmv_diff" Type="int" />
           <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="listing_date" Type="datetime" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -379,6 +380,7 @@
           <Property Type="String" Name="url_ziprealty" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="list_fmv_diff" />
           <Property Type="String" Name="remark" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="listing_date" Precision="3" />
         </EntityType>
         <Association Name="FK_Property_Sales_Property">
           <End Role="Properties" Type="AltairScopeModel.Property" Multiplicity="1" />
@@ -651,6 +653,7 @@
           <EntitySetMapping Name="Property_Sale">
             <EntityTypeMapping TypeName="AltairScopeModel.Property_Sale">
               <MappingFragment StoreEntitySet="Property_Sales">
+                <ScalarProperty Name="listing_date" ColumnName="listing_date" />
                 <ScalarProperty Name="remark" ColumnName="remark" />
                 <ScalarProperty Name="list_fmv_diff" ColumnName="list_fmv_diff" />
                 <ScalarProperty Name="url_ziprealty" ColumnName="url_ziprealty" />

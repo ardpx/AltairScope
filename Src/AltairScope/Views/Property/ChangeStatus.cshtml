@@ -5,6 +5,11 @@
 }
 
 <h2>Change Status</h2>
+<div>
+	@Html.ActionLink("Edit", "Edit", new {id = Model.Id})
+    @Html.ActionLink("View", "View" , new {id = Model.Id})
+</div>
+<br>
 
 @using (Html.BeginForm("ChangeStatus", "Property", FormMethod.Post)) {
     @Html.AntiForgeryToken()
@@ -69,7 +74,7 @@
             @Html.LabelFor(model => model.Remark)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Remark)
+            @Html.TextAreaFor(model => model.Remark, new { rows = 4 })
             @Html.ValidationMessageFor(model => model.Remark)
         </div>
 
