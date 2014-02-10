@@ -32,7 +32,12 @@ namespace AltairScope.Controllers
 								 p.Property_Sale.status == DecisionStatusType.OFFERED ||
 								 p.Property_Sale.status == DecisionStatusType.TO_OFFER;
 			}
-			if (criteria == "good")
+			else if (show == "underMonitor")
+			{
+				condition = p => p.Property_Sale.status == DecisionStatusType.BOUGHT ||
+								 p.Property_Sale.status == DecisionStatusType.OFFER_ACCEPTED;
+			}
+			else if (show == "good")
 			{
 				condition = p => p.Property_Sale.status != DecisionStatusType.UNABLE_TO_OFFER &&
 								 p.Property_Sale.status != DecisionStatusType.REJECTED &&
@@ -43,6 +48,7 @@ namespace AltairScope.Controllers
 								 p.Property_Sale.return_rate_mean > 0.05m &&
 								 p.Property_Evaluation.rental * 0.6 > p.Property_Evaluation.mortgage_monthly;
 			}
+			
 			var propertyList = _propertyDataServices.GetPropertyList(WebAppContext.Current, PropertyEagerLoadMode.Sale_Neighbourhood, condition);
 
 			_propertyVMServices = new PropertyViewModelServices();
@@ -257,6 +263,17 @@ namespace AltairScope.Controllers
 			}
 
 			return Json(new { finish = i, total = allProperties.Count});
+		}
+
+		public ActionResult Trend(Guid id)
+		{
+			_propertyDataServices = new PropertyDataServices();
+			var property = _propertyDataServices.GetPropertyById(WebAppContext.Current, id, PropertyEagerLoadMode.Trend);
+
+			_propertyVMServices = new PropertyViewModelServices();
+			var trendViewModel = _propertyVMServices.ConvertToTrendViewModel(property);
+
+			return View(trendViewModel);
 		}
     }
 }

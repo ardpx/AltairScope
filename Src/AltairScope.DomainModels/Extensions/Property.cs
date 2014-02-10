@@ -57,20 +57,47 @@ namespace AltairScope.DomainModels
 			List<int> fmvList = new List<int>();
 			if (fmv_zestimate.HasValue)
 			{
-				fmvList.Add(fmv_zestimate.Value); fmvList.Add(fmv_zestimate.Value);
+				fmvList.Add(fmv_zestimate.Value); 
 			}
 
 			if (fmv_smartzip.HasValue)
 			{
-				fmvList.Add(fmv_smartzip.Value); fmvList.Add(fmv_smartzip.Value);
+				fmvList.Add(fmv_smartzip.Value); 
 			}
-			if (fmv_eappraisal.HasValue)
-				fmvList.Add(fmv_eappraisal.Value);
+
+			if (fmv_homeseeker.HasValue)
+			{
+				fmvList.Add(fmv_homeseeker.Value); 
+			}
+			//if (fmv_eappraisal.HasValue)
+			//	fmvList.Add(fmv_eappraisal.Value);
 			if (fmvList.Count != 0)
 			{
 				fmv_mean = (int)fmvList.Average();
 				Property_Sale.list_fmv_diff = Property_Sale.price - fmv_mean.Value;
 			}
+
+			_UpdateFMVTracking();
+		}
+
+		private void _UpdateFMVTracking()
+		{
+			Property_FMV_Tracking todayFmvTrackingRecord = this.Property_FMV_Tracking
+															   .Where(t => t.create_date == DateTime.Now.Date)
+															   .FirstOrDefault();
+			if (todayFmvTrackingRecord == null)
+			{
+				todayFmvTrackingRecord = new Property_FMV_Tracking
+				{
+					create_date = DateTime.Now.Date
+				};
+				this.Property_FMV_Tracking.Add(todayFmvTrackingRecord);
+			}
+			todayFmvTrackingRecord.fmv_zestimate = fmv_zestimate;
+			todayFmvTrackingRecord.fmv_smartzip = fmv_smartzip;
+			todayFmvTrackingRecord.fmv_homeseeker = fmv_homeseeker;
+			todayFmvTrackingRecord.fmv_eappraisal = fmv_eappraisal;
+			todayFmvTrackingRecord.fmv_mean = fmv_mean;
 		}
 
 		private void _CalculateMeanOfRental()
@@ -85,6 +112,27 @@ namespace AltairScope.DomainModels
 
 			if (rentalList.Count != 0)
 				rental_mean = (int)rentalList.Average();
+
+			_UpdateRentalTracking();
+		}
+
+		private void _UpdateRentalTracking()
+		{
+			Property_Rental_Tracking todayRentalTrackingRecord = this.Property_Rental_Tracking
+																	 .Where(t => t.create_date == DateTime.Now.Date)
+																	 .FirstOrDefault();
+			if (todayRentalTrackingRecord == null)
+			{
+				todayRentalTrackingRecord = new Property_Rental_Tracking
+				{
+					create_date = DateTime.Now.Date
+				};
+				this.Property_Rental_Tracking.Add(todayRentalTrackingRecord);
+			}
+			todayRentalTrackingRecord.rental_zrent = rental_zrent;
+			todayRentalTrackingRecord.rental_rentometer = rental_rentometer;
+			todayRentalTrackingRecord.rental_zilpy = rental_zilpy;
+			todayRentalTrackingRecord.rental_mean = rental_mean;
 		}
 
 		private void _RecordCreationInfo()

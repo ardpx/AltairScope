@@ -30,11 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -74,6 +76,12 @@
     </Compile>
     <Compile Include="Extensions\Neighbourhood.cs" />
     <Compile Include="Extensions\Property.cs" />
+    <Compile Include="Property_FMV_Tracking.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Property_Rental_Tracking.cs">
+      <DependentUpon>AltairScopeEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Services\PropertyEvaluator.cs" />
     <Compile Include="Extensions\User.cs" />
     <Compile Include="IAppContext.cs" />

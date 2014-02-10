@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace AltairScope.Services
 {
@@ -29,6 +30,7 @@ namespace AltairScope.Services
 					propertyViewModel.Bed = property.bed.Value;
 					propertyViewModel.Tax = property.Property_Sale.tax;
 					propertyViewModel.Price = property.Property_Sale.price;
+					propertyViewModel.OfferPrice = property.Property_Sale.offer_price ?? 0;
 					propertyViewModel.Fmv_Mean = property.fmv_mean.Value;
 					propertyViewModel.Price_Fmv_Diff = property.Property_Sale.list_fmv_diff.Value;
 					propertyViewModel.Hoa = property.hoa;
@@ -87,6 +89,7 @@ namespace AltairScope.Services
 			editPropertyViewModel.FMV_Zestimate = property.fmv_zestimate;
 			editPropertyViewModel.FMV_Smartzip = property.fmv_smartzip;
 			editPropertyViewModel.FMV_Eappraisal = property.fmv_eappraisal;
+			editPropertyViewModel.FMV_Homeseeker = property.fmv_homeseeker;
 
 			editPropertyViewModel.Rental_Zrent = property.rental_zrent;
 			editPropertyViewModel.Rental_Rentometer = property.rental_rentometer;
@@ -127,6 +130,7 @@ namespace AltairScope.Services
 			property.fmv_zestimate = editPropertyViewModel.FMV_Zestimate;
 			property.fmv_smartzip = editPropertyViewModel.FMV_Smartzip;
 			property.fmv_eappraisal = editPropertyViewModel.FMV_Eappraisal;
+			property.fmv_homeseeker = editPropertyViewModel.FMV_Homeseeker;
 
 			property.rental_zrent = editPropertyViewModel.Rental_Zrent;
 			property.rental_rentometer = editPropertyViewModel.Rental_Rentometer;
@@ -175,6 +179,7 @@ namespace AltairScope.Services
 			viewablePropertyViewModel.FMV_Zestimate = property.fmv_zestimate;
 			viewablePropertyViewModel.FMV_Smartzip = property.fmv_smartzip;
 			viewablePropertyViewModel.FMV_Eappraisal = property.fmv_eappraisal;
+			viewablePropertyViewModel.FMV_Homeseeker = property.fmv_homeseeker;
 			viewablePropertyViewModel.FMV_Mean = property.fmv_mean;
 
 			viewablePropertyViewModel.Rental_Zrent = property.rental_zrent;
@@ -271,6 +276,75 @@ namespace AltairScope.Services
 				Remark = property.Property_Sale.remark
 			};
 			return changeStatusPropertyViewModel;
+		}
+
+		public PropertyTrendViewModel ConvertToTrendViewModel(Property property)
+		{
+			List<Property_FMV_Tracking> fmvTrend = property.Property_FMV_Tracking.OrderBy(ft => ft.create_date).ToList();
+			List<Property_Rental_Tracking> rentalTrend = property.Property_Rental_Tracking.OrderBy(ft => ft.create_date).ToList();
+			
+			if(fmvTrend == null)
+				return new PropertyTrendViewModel();
+
+			string[] label = null;
+			int?[] fmvMeanArray = null;
+			int?[] rentalMeanArray = null;
+
+			if (fmvTrend.Count == 1)
+			{
+				label = new string[1];
+				fmvMeanArray = new int?[1];
+				rentalMeanArray = new int?[1];
+
+				label[0] = fmvTrend.First().create_date.ToShortDateString();
+				fmvMeanArray[0] = fmvTrend.First().fmv_mean;
+				rentalMeanArray[0] = rentalTrend.First().rental_mean;
+			}
+			else
+			{
+				var startDate = fmvTrend.First().create_date;
+				var propertyFMVTrendDataList = fmvTrend.Select(ft => new
+				{
+					FMV = ft,
+					Day = ft.create_date.Subtract(startDate).Days
+				}).ToList();
+				int labelCount = propertyFMVTrendDataList.Last().Day + 1;
+
+				label = new string[labelCount];
+				fmvMeanArray = new int?[labelCount];
+				rentalMeanArray = new int?[labelCount];
+
+				int startIndex = 0;
+				label[startIndex] = fmvTrend.First().create_date.ToShortDateString();
+				fmvMeanArray[startIndex] = propertyFMVTrendDataList.First().FMV.fmv_mean;
+				rentalMeanArray[startIndex] = rentalTrend.First().rental_mean;
+
+				for (int i = 1; i < propertyFMVTrendDataList.Count; i++)
+				{
+					for (int j = startIndex + 1; j < propertyFMVTrendDataList[i].Day; j++)
+					{
+						label[j] = "";
+						fmvMeanArray[j] = fmvMeanArray[startIndex];
+						rentalMeanArray[j] = rentalMeanArray[startIndex];
+					}
+
+					startIndex = propertyFMVTrendDataList[i].Day;
+					label[startIndex] = propertyFMVTrendDataList[i].FMV.create_date.ToShortDateString();
+					fmvMeanArray[startIndex] = propertyFMVTrendDataList[i].FMV.fmv_mean;
+					rentalMeanArray[startIndex] = rentalTrend[i].rental_mean;
+				}
+				
+			}
+			var jsSerializer = new JavaScriptSerializer();
+			var trendViewMode = new PropertyTrendViewModel()
+			{
+				Label =  new HtmlString(jsSerializer.Serialize(label)),
+				FMVMeanTrend = new HtmlString(jsSerializer.Serialize(fmvMeanArray)),
+				RentalMeanTrend = new HtmlString(jsSerializer.Serialize(rentalMeanArray)),
+			};
+
+			return trendViewMode;
+			
 		}
 	}
 }

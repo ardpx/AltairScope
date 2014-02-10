@@ -18,6 +18,8 @@ namespace AltairScope.DomainModels
         {
             this.Property_Change_Histories = new HashSet<Property_Change_History>();
             this.Property_Comments = new HashSet<Property_Comment>();
+            this.Property_FMV_Tracking = new HashSet<Property_FMV_Tracking>();
+            this.Property_Rental_Tracking = new HashSet<Property_Rental_Tracking>();
         }
     
         public System.Guid id { get; set; }
@@ -43,6 +45,7 @@ namespace AltairScope.DomainModels
         public Nullable<int> created_by { get; set; }
         public Nullable<int> bed { get; set; }
         public Nullable<decimal> addition_total_ratio { get; set; }
+        public Nullable<int> fmv_homeseeker { get; set; }
     
         public virtual Property_Sale Property_Sale { get; set; }
         public virtual ICollection<Property_Change_History> Property_Change_Histories { get; set; }
@@ -50,5 +53,7 @@ namespace AltairScope.DomainModels
         public virtual Property_Evaluation Property_Evaluation { get; set; }
         public virtual Neighbourhood Neighbourhood { get; set; }
         public virtual User Creator { get; set; }
+        public virtual ICollection<Property_FMV_Tracking> Property_FMV_Tracking { get; set; }
+        public virtual ICollection<Property_Rental_Tracking> Property_Rental_Tracking { get; set; }
     }
 }

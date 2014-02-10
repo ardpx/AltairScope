@@ -32,5 +32,7 @@ namespace AltairScope.DomainModels
         public DbSet<User> Users { get; set; }
         public DbSet<Property_Evaluation> Property_Evaluation { get; set; }
         public DbSet<Neighbourhood> Neighbourhoods { get; set; }
+        public DbSet<Property_FMV_Tracking> Property_FMV_Tracking { get; set; }
+        public DbSet<Property_Rental_Tracking> Property_Rental_Tracking { get; set; }
     }
 }

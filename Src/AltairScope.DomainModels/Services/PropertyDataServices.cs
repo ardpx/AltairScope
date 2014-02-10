@@ -47,6 +47,9 @@ namespace AltairScope.DomainModels.Services
 				case PropertyEagerLoadMode.Sale_Evaluation_Neighbourhood:
 					query = query.Include("Property_Sale").Include("Neighbourhood").Include("Property_Evaluation");
 					break;
+				case PropertyEagerLoadMode.Trend:
+					query = query.Include("Property_FMV_Tracking").Include("Property_Rental_Tracking");
+					break;
 			}
 			return query;
 		}
@@ -64,6 +67,7 @@ namespace AltairScope.DomainModels.Services
 		None = 0,
 		Sale,
 		Sale_Neighbourhood,
-		Sale_Evaluation_Neighbourhood
+		Sale_Evaluation_Neighbourhood,
+		Trend
 	}
 }

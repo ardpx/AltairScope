@@ -11,6 +11,8 @@
           <EntitySet Name="Property_Change_Histories" EntityType="AltairScopeModel.Store.Property_Change_Histories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Property_Comments" EntityType="AltairScopeModel.Store.Property_Comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Property_Evaluations" EntityType="AltairScopeModel.Store.Property_Evaluations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Property_FMV_Tracking" EntityType="AltairScopeModel.Store.Property_FMV_Tracking" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Property_Rental_Tracking" EntityType="AltairScopeModel.Store.Property_Rental_Tracking" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Property_Sales" EntityType="AltairScopeModel.Store.Property_Sales" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="AltairScopeModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Properties_Users" Association="AltairScopeModel.Store.FK_Properties_Users">
@@ -36,6 +38,14 @@
           <AssociationSet Name="FK_Property_Evaluations_Property_evaluations" Association="AltairScopeModel.Store.FK_Property_Evaluations_Property_evaluations">
             <End Role="Properties" EntitySet="Properties" />
             <End Role="Property_Evaluations" EntitySet="Property_Evaluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Property_FMV_Tracking_Property" Association="AltairScopeModel.Store.FK_Property_FMV_Tracking_Property">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Property_FMV_Tracking" EntitySet="Property_FMV_Tracking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Property_Rental_Tracking_Property" Association="AltairScopeModel.Store.FK_Property_Rental_Tracking_Property">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="Property_Rental_Tracking" EntitySet="Property_Rental_Tracking" />
           </AssociationSet>
           <AssociationSet Name="FK_Property_Sales_Property" Association="AltairScopeModel.Store.FK_Property_Sales_Property">
             <End Role="Properties" EntitySet="Properties" />
@@ -84,6 +94,7 @@
           <Property Name="fmv_zestimate" Type="int" />
           <Property Name="fmv_smartzip" Type="int" />
           <Property Name="fmv_eappraisal" Type="int" />
+          <Property Name="fmv_homeseeker" Type="int" />
           <Property Name="fmv_mean" Type="int" />
           <Property Name="rental_zrent" Type="int" />
           <Property Name="rental_rentometer" Type="int" />
@@ -151,6 +162,31 @@
           <Property Name="rental" Type="int" />
           <Property Name="mortgage_monthly" Type="int" />
           <Property Name="loan_rate" Type="decimal" Precision="5" Scale="4" />
+        </EntityType>
+        <EntityType Name="Property_FMV_Tracking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="property_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="fmv_zestimate" Type="int" />
+          <Property Name="fmv_smartzip" Type="int" />
+          <Property Name="fmv_eappraisal" Type="int" />
+          <Property Name="fmv_homeseeker" Type="int" />
+          <Property Name="fmv_mean" Type="int" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property_Rental_Tracking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="property_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="rental_zrent" Type="int" />
+          <Property Name="rental_rentometer" Type="int" />
+          <Property Name="rental_zilpy" Type="int" />
+          <Property Name="rental_mean" Type="int" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Property_Sales">
           <Key>
@@ -264,6 +300,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Property_FMV_Tracking_Property">
+          <End Role="Properties" Type="AltairScopeModel.Store.Properties" Multiplicity="1" />
+          <End Role="Property_FMV_Tracking" Type="AltairScopeModel.Store.Property_FMV_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Property_FMV_Tracking">
+              <PropertyRef Name="property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Property_Rental_Tracking_Property">
+          <End Role="Properties" Type="AltairScopeModel.Store.Properties" Multiplicity="1" />
+          <End Role="Property_Rental_Tracking" Type="AltairScopeModel.Store.Property_Rental_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Property_Rental_Tracking">
+              <PropertyRef Name="property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Property_Sales_Property">
           <End Role="Properties" Type="AltairScopeModel.Store.Properties" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -322,6 +382,16 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Property" EntitySet="Properties" />
           </AssociationSet>
+          <EntitySet Name="Property_FMV_Tracking" EntityType="AltairScopeModel.Property_FMV_Tracking" />
+          <AssociationSet Name="FK_Property_FMV_Tracking_Property" Association="AltairScopeModel.FK_Property_FMV_Tracking_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Property_FMV_Tracking" EntitySet="Property_FMV_Tracking" />
+          </AssociationSet>
+          <EntitySet Name="Property_Rental_Tracking" EntityType="AltairScopeModel.Property_Rental_Tracking" />
+          <AssociationSet Name="FK_Property_Rental_Tracking_Property" Association="AltairScopeModel.FK_Property_Rental_Tracking_Property">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="Property_Rental_Tracking" EntitySet="Property_Rental_Tracking" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Property">
           <Key>
@@ -356,6 +426,9 @@
           <NavigationProperty Name="Creator" Relationship="AltairScopeModel.FK_Properties_Users" FromRole="Property" ToRole="User" />
           <Property Type="Int32" Name="bed" />
           <Property Type="Decimal" Name="addition_total_ratio" Precision="5" Scale="4" />
+          <Property Type="Int32" Name="fmv_homeseeker" />
+          <NavigationProperty Name="Property_FMV_Tracking" Relationship="AltairScopeModel.FK_Property_FMV_Tracking_Property" FromRole="Property" ToRole="Property_FMV_Tracking" />
+          <NavigationProperty Name="Property_Rental_Tracking" Relationship="AltairScopeModel.FK_Property_Rental_Tracking_Property" FromRole="Property" ToRole="Property_Rental_Tracking" />
         </EntityType>
         <EntityType Name="Property_Sale">
           <Key>
@@ -615,6 +688,57 @@
           <Member Name="Created" Value="5" />
           <Member Name="Edited" Value="6" />
         </EnumType>
+        <EntityType Name="Property_FMV_Tracking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Guid" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="property_id" Nullable="false" />
+          <Property Type="Int32" Name="fmv_zestimate" />
+          <Property Type="Int32" Name="fmv_smartzip" />
+          <Property Type="Int32" Name="fmv_eappraisal" />
+          <Property Type="Int32" Name="fmv_homeseeker" />
+          <Property Type="Int32" Name="fmv_mean" />
+          <Property Type="DateTime" Name="create_date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Property" Relationship="AltairScopeModel.FK_Property_FMV_Tracking_Property" FromRole="Property_FMV_Tracking" ToRole="Property" />
+        </EntityType>
+        <Association Name="FK_Property_FMV_Tracking_Property">
+          <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="AltairScopeModel.Property_FMV_Tracking" Role="Property_FMV_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Property_FMV_Tracking">
+              <PropertyRef Name="property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Property_Rental_Tracking">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Guid" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="property_id" Nullable="false" />
+          <Property Type="Int32" Name="rental_zrent" />
+          <Property Type="Int32" Name="rental_rentometer" />
+          <Property Type="Int32" Name="rental_zilpy" />
+          <Property Type="Int32" Name="rental_mean" />
+          <Property Type="DateTime" Name="create_date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Property" Relationship="AltairScopeModel.FK_Property_Rental_Tracking_Property" FromRole="Property_Rental_Tracking" ToRole="Property" />
+        </EntityType>
+        <Association Name="FK_Property_Rental_Tracking_Property">
+          <End Type="AltairScopeModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="AltairScopeModel.Property_Rental_Tracking" Role="Property_Rental_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Property_Rental_Tracking">
+              <PropertyRef Name="property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -624,6 +748,7 @@
           <EntitySetMapping Name="Properties">
             <EntityTypeMapping TypeName="AltairScopeModel.Property">
               <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="fmv_homeseeker" ColumnName="fmv_homeseeker" />
                 <ScalarProperty Name="addition_total_ratio" ColumnName="addition_total_ratio" />
                 <ScalarProperty Name="bed" ColumnName="bed" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
@@ -770,6 +895,33 @@
                 <ScalarProperty Name="rental" ColumnName="rental" />
                 <ScalarProperty Name="median_price" ColumnName="median_price" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property_FMV_Tracking">
+            <EntityTypeMapping TypeName="AltairScopeModel.Property_FMV_Tracking">
+              <MappingFragment StoreEntitySet="Property_FMV_Tracking">
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="fmv_mean" ColumnName="fmv_mean" />
+                <ScalarProperty Name="fmv_homeseeker" ColumnName="fmv_homeseeker" />
+                <ScalarProperty Name="fmv_eappraisal" ColumnName="fmv_eappraisal" />
+                <ScalarProperty Name="fmv_smartzip" ColumnName="fmv_smartzip" />
+                <ScalarProperty Name="fmv_zestimate" ColumnName="fmv_zestimate" />
+                <ScalarProperty Name="property_id" ColumnName="property_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property_Rental_Tracking">
+            <EntityTypeMapping TypeName="AltairScopeModel.Property_Rental_Tracking">
+              <MappingFragment StoreEntitySet="Property_Rental_Tracking">
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="rental_mean" ColumnName="rental_mean" />
+                <ScalarProperty Name="rental_zilpy" ColumnName="rental_zilpy" />
+                <ScalarProperty Name="rental_rentometer" ColumnName="rental_rentometer" />
+                <ScalarProperty Name="rental_zrent" ColumnName="rental_zrent" />
+                <ScalarProperty Name="property_id" ColumnName="property_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

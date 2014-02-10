@@ -159,6 +159,14 @@
             @Html.ValidationMessageFor(model => model.FMV_Eappraisal)
         </div>
 
+		<div class="editor-label">
+            @Html.LabelFor(model => model.FMV_Homeseeker)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FMV_Homeseeker)
+            @Html.ValidationMessageFor(model => model.FMV_Homeseeker)
+        </div>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Rental_Zrent)
         </div>

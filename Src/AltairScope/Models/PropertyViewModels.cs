@@ -21,6 +21,7 @@ namespace AltairScope.Models
 		public int Bed { set; get; }
 		public decimal Tax { set; get; }
 		public int Price { set; get; }
+		public int OfferPrice { set; get; }
 		public int Fmv_Mean { set; get; }
 		public int Price_Fmv_Diff { set; get; }
 		public int Hoa { set; get; }
@@ -90,6 +91,9 @@ namespace AltairScope.Models
 		[Display(Name = "FMV Eappraisal", Order = 17)]
 		public int? FMV_Eappraisal { set; get; }
 
+		[Display(Name = "FMV HomeSeeker", Order = 17)]
+		public int? FMV_Homeseeker { set; get; }
+
 		[Display(Name = "Zrent", Order = 18)]
 		public int? Rental_Zrent { set; get; }
 
@@ -100,7 +104,7 @@ namespace AltairScope.Models
 		public int? Rental_Zilpy { set; get; }
 
 		[Display(Name = "Zillow Growth Rate", Order = 21)]
-		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = false)]
+		[DisplayFormat(DataFormatString = "{0:P3}", ApplyFormatInEditMode = false)]
 		public decimal? ZillowGrowthRate { set; get; }
 
 		[Display(Name = "Listing Days", Order = 7)]
@@ -222,5 +226,12 @@ namespace AltairScope.Models
 
 		[Display(Name = "Remark", Order = 6)]
 		public string Remark { set; get; }
+	}
+
+	public class PropertyTrendViewModel
+	{
+		public HtmlString Label { set; get; }
+		public HtmlString FMVMeanTrend { set; get; }
+		public HtmlString RentalMeanTrend { set; get; }
 	}
 }
