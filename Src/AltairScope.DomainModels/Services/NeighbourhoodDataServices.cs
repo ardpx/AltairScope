@@ -16,5 +16,19 @@ namespace AltairScope.DomainModels.Services
 						  .FirstOrDefault();
 			return id;
 		}
+
+		public List<Neighbourhood> GetAll(IAppContext appContext)
+		{
+			var db = appContext.GetPersistenceContext();
+			var neighbbourhoodList = db.Neighbourhoods.ToList();
+			return neighbbourhoodList;
+		}
+
+		public Neighbourhood GetNeighbourhoodById(IAppContext appContext, Guid id)
+		{
+			var db = appContext.GetPersistenceContext();
+			var neighbbourhood = db.Neighbourhoods.Where(n => n.id == id).FirstOrDefault();
+			return neighbbourhood;
+		}
 	}
 }

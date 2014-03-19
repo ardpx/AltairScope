@@ -198,6 +198,13 @@ namespace AltairScope.Models
 		[Display(Name = "Neighbourhood Vacancy", Order = 20)]
 		[DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
 		public decimal? NeighbourhoodVacancy { set; get; }
+
+		[Display(Name = "Neighbourhood Income Score", Order = 21)]
+		public decimal? NeighbourhoodIncomeScore { set; get; }
+
+		[Display(Name = "Neighbourhood View Link", Order = 22)]
+		public Guid NeighbourhoodId { set; get; }
+		
 	}
 
 	public class ChangeStatusPropertyViewModel

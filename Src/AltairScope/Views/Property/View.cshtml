@@ -35,6 +35,12 @@
             @Html.DisplayFor(model => model.Neighbourhood)
         </div>
 		<div class="editor-label">
+            @Html.LabelFor(model => model.NeighbourhoodIncomeScore)
+        </div>
+        <div class="editor-field wide-field">
+            @Html.DisplayFor(model => model.NeighbourhoodIncomeScore)
+        </div>
+		<div class="editor-label">
             @Html.LabelFor(model => model.NeighbourhoodVacancy)
         </div>
         <div class="editor-field">
@@ -48,6 +54,12 @@
 			{
 			<a href="@Model.NeighbourhoodUrl">@Model.NeighbourhoodUrl</a>
 			}
+        </div>
+		<div class="editor-label">
+            @Html.LabelFor(model => model.NeighbourhoodId)
+        </div>
+        <div class="editor-field wide-field">
+            @Html.ActionLink("View", "View", "Neighbourhood", new {id = Model.NeighbourhoodId})
         </div>
 		<div class="editor-label">
             @Html.LabelFor(model => model.SaleType)

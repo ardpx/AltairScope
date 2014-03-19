@@ -39,6 +39,7 @@ namespace AltairScope.DomainModels
         public Nullable<decimal> score_all { get; set; }
         public Nullable<decimal> score_investment { get; set; }
         public Nullable<decimal> score_mean { get; set; }
+        public Nullable<int> income { get; set; }
     
         public virtual ICollection<Property> Properties { get; set; }
     }

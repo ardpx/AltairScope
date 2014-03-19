@@ -45,6 +45,14 @@
             @Html.ValidationMessageFor(model => model.Url)
         </div>
 
+		 <div class="editor-label">
+            @Html.LabelFor(model => model.Income)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Income)
+            @Html.ValidationMessageFor(model => model.Income)
+        </div>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Education)
         </div>

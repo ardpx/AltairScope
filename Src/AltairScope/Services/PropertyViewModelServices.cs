@@ -154,6 +154,8 @@ namespace AltairScope.Services
 				viewablePropertyViewModel.Neighbourhood = property.Neighbourhood.name;
 				viewablePropertyViewModel.NeighbourhoodVacancy = property.Neighbourhood.vacancy_ratio;
 				viewablePropertyViewModel.NeighbourhoodUrl = property.Neighbourhood.url;
+				viewablePropertyViewModel.NeighbourhoodIncomeScore = property.Neighbourhood.score_all;
+				viewablePropertyViewModel.NeighbourhoodId = property.Neighbourhood.id;
 				
 			}
 			viewablePropertyViewModel.Address = property.address;

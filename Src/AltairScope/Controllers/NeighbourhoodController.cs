@@ -1,4 +1,5 @@
-﻿using AltairScope.DomainModels.Services;
+﻿using AltairScope.DomainModels;
+using AltairScope.DomainModels.Services;
 using AltairScope.Infrastructures;
 using AltairScope.Models;
 using AltairScope.Services;
@@ -19,7 +20,21 @@ namespace AltairScope.Controllers
 
         public ActionResult Index()
         {
-            return View();
+			_NeighbourhoodDataServices = new NeighbourhoodDataServices();
+			var neighbourhoodViewList = _NeighbourhoodDataServices.GetAll(WebAppContext.Current);
+
+			_NeighbourhoodVMServices = new NeighbourhoodViewModelServices();
+			var neighbourhoodViewableModelList = new List<ViewableNeighbourhoodViewModel>();
+			if(neighbourhoodViewList != null)
+			{
+				foreach (Neighbourhood neighbourhood in neighbourhoodViewList)
+				{
+					neighbourhoodViewableModelList.Add(_NeighbourhoodVMServices.ConvertToViewableModel(neighbourhood));
+				}
+			}
+
+			return View(neighbourhoodViewableModelList);
+			
         }
 
         //
@@ -63,7 +78,13 @@ namespace AltairScope.Controllers
 
 		public ActionResult View(Guid id)
 		{
-			return View();
+			_NeighbourhoodDataServices = new NeighbourhoodDataServices();
+			var neighbourhood = _NeighbourhoodDataServices.GetNeighbourhoodById(WebAppContext.Current, id);
+
+			_NeighbourhoodVMServices = new NeighbourhoodViewModelServices();
+			var viewableNeighbourhoodViewModel = _NeighbourhoodVMServices.ConvertToViewableModel(neighbourhood);
+
+			return View(viewableNeighbourhoodViewModel);
 		}
 
         //
@@ -71,25 +92,41 @@ namespace AltairScope.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            return View();
+			_NeighbourhoodDataServices = new NeighbourhoodDataServices();
+			var neighbourhood = _NeighbourhoodDataServices.GetNeighbourhoodById(WebAppContext.Current, id);
+
+			_NeighbourhoodVMServices = new NeighbourhoodViewModelServices();
+			var editNeighbourhoodViewModel = _NeighbourhoodVMServices.ConvertToEditModel(neighbourhood);
+
+			return View(editNeighbourhoodViewModel);
         }
 
         //
         // POST: /Neigbourhood/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+		public ActionResult Edit(EditNeighbourhoodViewModel editNeighbourhoodViewModel)
         {
-            try
-            {
-                // TODO: Add update logic here
+			var id = editNeighbourhoodViewModel.Id;
+			try
+			{
+				_NeighbourhoodDataServices = new NeighbourhoodDataServices();
+				var exisitngNeighbourhood = _NeighbourhoodDataServices.GetNeighbourhoodById(WebAppContext.Current, id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-				throw;
-            }
+				if (exisitngNeighbourhood == null)
+					throw new Exception("Neighbourhood not found");
+
+				_NeighbourhoodVMServices = new NeighbourhoodViewModelServices();
+				_NeighbourhoodVMServices.UpdateDomainModel(exisitngNeighbourhood, editNeighbourhoodViewModel);
+				exisitngNeighbourhood.ValidateAndSave();
+				WebAppContext.Current.Commit();
+
+				return RedirectToAction("View", new { id = exisitngNeighbourhood.id });
+			}
+			catch
+			{
+				return View("Edit", new { id = id });
+			}
         }
 
         //

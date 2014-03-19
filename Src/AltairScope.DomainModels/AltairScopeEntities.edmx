@@ -62,6 +62,7 @@
           <Property Name="rental" Type="int" Nullable="false" />
           <Property Name="p_r_rate" Type="decimal" Precision="9" Scale="8" />
           <Property Name="url" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="income" Type="int" />
           <Property Name="education" Type="int" Nullable="false" />
           <Property Name="educational_rating" Type="int" Nullable="false" />
           <Property Name="appreciation_1990" Type="decimal" Nullable="false" Precision="6" Scale="4" />
@@ -625,10 +626,11 @@
           <Property Type="Decimal" Name="appreciation_mean" Precision="10" Scale="8" />
           <Property Type="Int32" Name="crime_index" Nullable="false" />
           <Property Type="Decimal" Name="vacancy_ratio" Nullable="false" Precision="5" Scale="4" />
-          <Property Type="Decimal" Name="score_all" Precision="5" Scale="4" />
+          <Property Type="Decimal" Name="score_all" Precision="6" Scale="4" />
           <Property Type="Decimal" Name="score_investment" Precision="5" Scale="4" />
           <Property Type="Decimal" Name="score_mean" Precision="5" Scale="4" />
           <NavigationProperty Name="Properties" Relationship="AltairScopeModel.FK_Properties_Neighbourhood" FromRole="Neighbourhood" ToRole="Property" />
+          <Property Type="Int32" Name="income" />
         </EntityType>
         <Association Name="FK_Properties_Neighbourhood">
           <End Type="AltairScopeModel.Neighbourhood" Role="Neighbourhood" Multiplicity="0..1" />
@@ -876,6 +878,7 @@
           <EntitySetMapping Name="Neighbourhoods">
             <EntityTypeMapping TypeName="AltairScopeModel.Neighbourhood">
               <MappingFragment StoreEntitySet="Neighbourhoods">
+                <ScalarProperty Name="income" ColumnName="income" />
                 <ScalarProperty Name="score_mean" ColumnName="score_mean" />
                 <ScalarProperty Name="score_investment" ColumnName="score_investment" />
                 <ScalarProperty Name="score_all" ColumnName="score_all" />
