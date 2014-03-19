@@ -18,7 +18,7 @@
 		column.Add(p => p.MedianPrice).Titled("Median Price");
 		column.Add(p => p.Rental).Titled("Rental");
 		column.Add(p => p.PRRatio).Titled("P/R").Format("{0:0.00%}").Sortable(true);
-		column.Add(p => p.VacancyRatio).Titled("Vancancy").Format("{0:0.00%}").Sortable(true);
+		column.Add(p => p.VacancyRatio).Titled("Vacancy").Format("{0:0.00%}").Sortable(true);
 		column.Add(p => p.CrimeIndex).Titled("Crime").Sortable(true);
 		column.Add(p => p.Appreciation_10Y).Titled("App 10y").Format("{0:0.00%}").Sortable(true);
 		column.Add(p => p.Appreciation_5Y).Titled("App 5y").Format("{0:0.00%}").Sortable(true);
@@ -30,5 +30,5 @@
 							 .Sanitized(false).Encoded(false)
 							 .RenderValueAs(p => Html.ActionLink("Edit", "Edit", "Neighbourhood", new { Id = p.Id }, null) + "" +
 												 Html.ActionLink("View", "View", "Neighbourhood", new { Id = p.Id }, null) + "" +
-												 "<a href=\"" + p.Url + "\">Scount</a>");
+												 "<a href=\"" + p.Url + "\">Scout</a>");
 	}).WithPaging(40).WithMultipleFilters()
